@@ -36,4 +36,4 @@ Logos and favicons are included in the public/ folder.
 - Improved layout and animations
 
 
-Built with ❤️ using React + Vite
+
