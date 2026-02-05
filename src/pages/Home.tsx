@@ -1,10 +1,18 @@
+
+
 export default function Home() {
   return (
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
       <div className="container">
-        {/* Top section (call it whatever you want; not required to be “Hero”) */}
         <section className="card" style={{ padding: 22 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: 18, alignItems: "center" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.2fr 0.8fr",
+              gap: 18,
+              alignItems: "center",
+            }}
+          >
             <div>
               <div style={{ display: "inline-flex", gap: 10, alignItems: "center" }}>
                 <span
@@ -37,15 +45,44 @@ export default function Home() {
             </div>
 
             <div className="card" style={{ padding: 18, borderRadius: 16 }}>
-              <div style={{ fontWeight: 800, color: "var(--gold2)" }}>Next Pop-Up</div>
-              <div style={{ marginTop: 8, fontSize: 18, fontWeight: 750 }}>Add details from IG</div>
-              <div className="muted" style={{ marginTop: 6 }}>
-                Date • Time • Location
-              </div>
-              <div style={{ marginTop: 12 }}>
-                <a className="btn" href="/contact">Get Directions</a>
-              </div>
-            </div>
+  <div style={{ fontWeight: 800, color: "var(--gold2)" }}>Next Pop-Up</div>
+
+  <div style={{ marginTop: 10 }}>
+    <img
+      src="/popup-latest.png"
+      alt="Pre & Post Pop-Up Flyer"
+      style={{
+        width: "100%",
+        borderRadius: 12,
+        border: "1px solid var(--border)",
+        display: "block",
+      }}
+    />
+  </div>
+
+  <div style={{ marginTop: 12, fontWeight: 900, fontSize: 16 }}>
+    Coffee &amp; Matcha Pop-Up Event
+  </div>
+
+  <div className="muted" style={{ marginTop: 6, lineHeight: 1.55 }}>
+    <div><b>Date:</b> 2/07/2026</div>
+    <div><b>Hours:</b> 9:00am – 1:00pm EST</div>
+    <div><b>Location:</b> Dwell Nona Place — 10207 Dwell Ct, Orlando, FL 32832</div>
+  </div>
+
+  <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+    <a className="btn btnPrimary" href="/pop-ups">View Details</a>
+    <a
+      className="btn"
+      href="https://www.google.com/maps/search/?api=1&query=10207%20Dwell%20Ct%2C%20Orlando%2C%20FL%2032832"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Open in Maps
+    </a>
+  </div>
+</div>
+
           </div>
         </section>
 
@@ -71,7 +108,7 @@ export default function Home() {
                 Mirror the IG vibe here — photos, menu highlights, pop-up posts.
               </div>
             </div>
-            <a className="btn btnPrimary" href="https://instagram.com/" target="_blank" rel="noreferrer">
+            <a className="btn btnPrimary" href="https://www.instagram.com/preandpostcoffee/" target="_blank" rel="noreferrer">
               Open Instagram
             </a>
           </div>
