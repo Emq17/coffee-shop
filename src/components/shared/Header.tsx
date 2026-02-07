@@ -1,4 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const nav = [
@@ -7,6 +8,14 @@ export default function Header() {
     { label: "Pop-Ups", to: "/pop-ups" },
     { label: "Contact", to: "/contact" },
   ];
+
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // Close the mobile menu when you navigate
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header
@@ -38,10 +47,11 @@ export default function Header() {
             display: "flex",
             alignItems: "center",
             gap: 12,
-            minWidth: 220,
+            minWidth: 0, // ✅ allows truncation on small screens
+            flex: "1 1 auto",
+            textDecoration: "none",
           }}
         >
-          {/* Uses the icon you already have in /public */}
           <img
             src="/android-chrome-192x192.png"
             alt="Pre & Post Coffee Shop"
@@ -52,29 +62,47 @@ export default function Header() {
               border: "1px solid var(--border)",
               background: "rgba(18, 24, 36, 0.35)",
               display: "block",
+              flex: "0 0 auto",
             }}
           />
 
-          <div style={{ lineHeight: 1.1 }}>
-            <div style={{ fontWeight: 900, letterSpacing: 0.2 }}>
+          <div style={{ lineHeight: 1.1, minWidth: 0 }}>
+            <div
+              style={{
+                fontWeight: 900,
+                letterSpacing: 0.2,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
               Pre &amp; Post Coffee Shop
             </div>
-            <div className="muted" style={{ fontSize: 13 }}>
+            <div
+              className="muted"
+              style={{
+                fontSize: 13,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
               Coffee • Matcha • Protein
             </div>
           </div>
         </Link>
 
-        {/* Nav */}
+        {/* Desktop nav (hidden on mobile) */}
         <nav
           aria-label="Primary navigation"
           style={{
-            display: "flex",
+            display: "none",
             alignItems: "center",
             gap: 8,
             flexWrap: "wrap",
             justifyContent: "flex-end",
           }}
+          className="desktopNav"
         >
           {nav.map((item) => (
             <NavLink
@@ -108,7 +136,101 @@ export default function Header() {
             Instagram
           </a>
         </nav>
+
+        {/* Mobile hamburger (hidden on desktop) */}
+        <button
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className="mobileMenuBtn"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 42,
+            height: 42,
+            borderRadius: 9999,
+            border: "1px solid var(--border)",
+            background: "rgba(18, 24, 36, 0.35)",
+            color: "var(--text)",
+            fontWeight: 900,
+            flex: "0 0 auto",
+          }}
+        >
+          {open ? "✕" : "☰"}
+        </button>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {open && (
+        <div
+          className="mobileMenu"
+          style={{
+            padding: "10px 12px 14px",
+            borderTop: "1px solid var(--border)",
+            background: "rgba(11, 15, 20, 0.88)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1100,
+              margin: "0 auto",
+              padding: "0 12px",
+              display: "grid",
+              gap: 10,
+            }}
+          >
+            {nav.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                style={({ isActive }) => ({
+                  padding: "12px 14px",
+                  borderRadius: 16,
+                  border: `1px solid ${
+                    isActive ? "rgba(226, 185, 121, 0.55)" : "var(--border)"
+                  }`,
+                  background: isActive ? "rgba(200, 155, 90, 0.16)" : "rgba(18, 24, 36, 0.25)",
+                  color: "var(--text)",
+                  fontWeight: 800,
+                  fontSize: 14,
+                  lineHeight: 1,
+                  textDecoration: "none",
+                })}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+
+            <a
+              className="btn btnPrimary"
+              href="https://www.instagram.com/preandpostcoffee/"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                padding: "12px 14px",
+                borderRadius: 16,
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              Instagram
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Tiny CSS (no new file needed) */}
+      <style>{`
+        /* Show desktop nav at >= 768px */
+        @media (min-width: 768px) {
+          .desktopNav { display: flex !important; }
+          .mobileMenuBtn { display: none !important; }
+          .mobileMenu { display: none !important; }
+        }
+      `}</style>
     </header>
   );
 }
