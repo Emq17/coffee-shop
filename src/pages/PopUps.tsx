@@ -23,25 +23,18 @@ export default function PopUps() {
         >
           <div>
             <div style={{ fontWeight: 900, fontSize: 20 }}>
-              Coffee &amp; Matcha Pop-Up Event
+              Coffee Pop-Up Event
             </div>
 
             <div className="muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
               <div>
-                <b>Date:</b> 2/07/2026
+                <b>Date:</b> 2/11/2026
               </div>
               <div>
                 <b>Hours:</b> 9:00am – 1:00pm EST
               </div>
               <div>
-                <b>Location:</b> Dwell Nona Place — 10207 Dwell Ct, Orlando, FL
-                32832
-              </div>
-              <div style={{ marginTop: 10 }}>
-                Valentine special:{" "}
-                <span style={{ color: "var(--gold2)", fontWeight: 900 }}>
-                  Ube Latte
-                </span>
+                <b>Location:</b> Crunch Fitness Lake Nona — 11926 Narcoossee Rd, Suite 100, Orlando, FL, 32832
               </div>
             </div>
 
@@ -75,16 +68,6 @@ export default function PopUps() {
             />
             <div className="muted" style={{ marginTop: 10, lineHeight: 1.5 }}>
         Be sure to check back for the next location & featured drinks!
-            </div>
-          </div>
-        </section>
-
-        <section style={{ marginTop: 14, display: "grid", gap: 14 }}>
-          <div className="card" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900 }}>More events coming soon</div>
-            <div className="muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
-              We’ll add future and past pop-ups here as cards—same style, clean
-              and easy to scan.
             </div>
           </div>
         </section>

@@ -49,9 +49,9 @@ export default function Home() {
               </div>
 
               <div className="muted" style={{ marginTop: 6, lineHeight: 1.55 }}>
-                <div><b>Date:</b> 2/07/2026</div>
+                <div><b>Date:</b> 2/11/2026</div>
                 <div><b>Hours:</b> 9:00am – 1:00pm EST</div>
-                <div><b>Location:</b> Dwell Nona Place — 10207 Dwell Ct, Orlando, FL 32832</div>
+                <div><b>Location:</b> Crunch Fitness Lake Nona — 11926 Narcoossee Rd, Suite 100, Orlando, FL, 32832</div>
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
@@ -82,19 +82,37 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="card" style={{ marginTop: 18, padding: 18 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-            <div>
-              <div style={{ fontWeight: 800 }}>Instagram</div>
-              <div className="muted" style={{ marginTop: 6 }}>
-                Mirror the IG vibe here — photos, menu highlights, pop-up posts.
-              </div>
-            </div>
-            <a className="btn btnPrimary" href="https://www.instagram.com/preandpostcoffee/" target="_blank" rel="noreferrer">
-              Open Instagram
-            </a>
-          </div>
-        </section>
+<section className="card" style={{ marginTop: 18, padding: 18 }}>
+  <div style={{ display: "grid", gap: 12 }}>
+    <div>
+      <div style={{ fontWeight: 800 }}>Follow Along</div>
+      <div className="muted" style={{ marginTop: 6 }}>
+        Follow us for pop-up announcements, drink drops, and behind-the-scenes.
+      </div>
+    </div>
+
+    <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+      <a
+        className="btn btnPrimary"
+        href="https://www.instagram.com/preandpostcoffee/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Instagram
+      </a>
+
+      <a
+        className="btn"
+        href="https://www.tiktok.com/@preandpostcoffee?_r=1&_t=ZT-92kOsWdobfh&fbclid=PAdGRleAP4cAtleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacEGoL718xX-OSk5r9t_Nea1SOKyBUqGntdd-Zj1zTEJDl3uUF3Cf2HyrqEag_aem_bTe893o6jPSVTghXOeqkNA"
+        target="_blank"
+        rel="noreferrer"
+      >
+        TikTok
+      </a>
+    </div>
+  </div>
+</section>
+
       </div>
 
       <style>{`
