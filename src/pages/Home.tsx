@@ -62,8 +62,7 @@ export default function Home() {
                   maxWidth: 620,
                 }}
               >
-                Nutritious café-inspired drinks. Built for your before &amp; after —
-                training, work, or whatever you’re chasing.
+                Serving nutritious café-inspired drinks un Central Florida.
               </p>
 
               <div
