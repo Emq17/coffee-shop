@@ -3,14 +3,26 @@ export default function Home() {
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
       <div className="container">
         <section className="card" style={{ padding: 22 }}>
+          {/* Hero grid */}
           <div
+            className="homeHeroGrid"
             style={{
               display: "grid",
-              gridTemplateColumns: "1.2fr 0.8fr",
+              gridTemplateColumns: "1fr",
               gap: 18,
-              alignItems: "center",
+              alignItems: "start",
             }}
           >
+            <style>{`
+              @media (min-width: 900px) {
+                .homeHeroGrid {
+                  grid-template-columns: 1.2fr 0.8fr !important;
+                  align-items: center !important;
+                }
+              }
+            `}</style>
+
+            {/* Left: Text */}
             <div>
               <div style={{ display: "inline-flex", gap: 10, alignItems: "center" }}>
                 <span
@@ -25,23 +37,53 @@ export default function Home() {
                 >
                   Pop-up coffee
                 </span>
-                <span className="muted" style={{ fontSize: 13 }}>Orlando, FL</span>
+                <span className="muted" style={{ fontSize: 13 }}>
+                  Orlando, FL
+                </span>
               </div>
 
-              <h1 style={{ margin: "12px 0 0", fontSize: 44, lineHeight: 1.05, letterSpacing: -0.4 }}>
+              <h1
+                style={{
+                  margin: "12px 0 0",
+                  fontSize: 44,
+                  lineHeight: 1.05,
+                  letterSpacing: -0.4,
+                }}
+              >
                 Pre &amp; Post Coffee Shop
               </h1>
 
-              <p className="muted" style={{ marginTop: 10, fontSize: 16, lineHeight: 1.6, maxWidth: 620 }}>
-                Nutritious café-inspired drinks. Built for your before &amp; after — training, work, or whatever you’re chasing.
+              <p
+                className="muted"
+                style={{
+                  marginTop: 10,
+                  fontSize: 16,
+                  lineHeight: 1.6,
+                  maxWidth: 620,
+                }}
+              >
+                Nutritious café-inspired drinks. Built for your before &amp; after —
+                training, work, or whatever you’re chasing.
               </p>
 
-              <div style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap" }}>
-                <a className="btn btnPrimary" href="/menu">View Menu</a>
-                <a className="btn" href="/pop-ups">See Next Pop-Up</a>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  marginTop: 14,
+                  flexWrap: "wrap",
+                }}
+              >
+                <a className="btn btnPrimary" href="/menu">
+                  View Menu
+                </a>
+                <a className="btn" href="/pop-ups">
+                  See Next Pop-Up
+                </a>
               </div>
             </div>
 
+            {/* Right: Next Pop-Up */}
             <div className="card" style={{ padding: 18, borderRadius: 16 }}>
               <div style={{ fontWeight: 800, color: "var(--gold2)" }}>Next Pop-Up</div>
 
@@ -63,13 +105,29 @@ export default function Home() {
               </div>
 
               <div className="muted" style={{ marginTop: 6, lineHeight: 1.55 }}>
-                <div><b>Date:</b> 2/11/2026</div>
-                <div><b>Hours:</b> 9:00am – 1:00pm EST</div>
-                <div><b>Location:</b> Crunch Fitness Lake Nona — 11926 Narcoossee Rd, Suite 100, Orlando, FL, 32832</div>
+                <div>
+                  <b>Date:</b> 2/11/2026
+                </div>
+                <div>
+                  <b>Hours:</b> 9:00am – 1:00pm EST
+                </div>
+                <div>
+                  <b>Location:</b> Crunch Fitness Lake Nona — 11926 Narcoossee Rd,
+                  Suite 100, Orlando, FL, 32832
+                </div>
               </div>
 
-              <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                <a className="btn btnPrimary" href="/pop-ups">View Details</a>
+              <div
+                style={{
+                  marginTop: 12,
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                }}
+              >
+                <a className="btn btnPrimary" href="/pop-ups">
+                  View Details
+                </a>
                 <a
                   className="btn"
                   href="https://www.google.com/maps/search/?api=1&query=11926%20Narcoossee%20Rd%2C%20Suite%20100%2C%20Orlando%2C%20FL%2032832"
@@ -83,7 +141,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3 cards (cleaned so Follow Along isn't duplicated) */}
+        {/* 3 info cards (responsive, no squeezing) */}
         <section
           style={{
             marginTop: 18,
@@ -92,7 +150,6 @@ export default function Home() {
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
           }}
         >
-
           {[
             { title: "Featured Drinks", desc: "Top sellers + seasonal drops." },
             { title: "About", desc: "What “Pre & Post” means." },
@@ -100,12 +157,14 @@ export default function Home() {
           ].map((x) => (
             <div key={x.title} className="card" style={{ padding: 18 }}>
               <div style={{ fontWeight: 800 }}>{x.title}</div>
-              <div className="muted" style={{ marginTop: 8, lineHeight: 1.5 }}>{x.desc}</div>
+              <div className="muted" style={{ marginTop: 8, lineHeight: 1.5 }}>
+                {x.desc}
+              </div>
             </div>
           ))}
         </section>
 
-        {/* Follow Along (single section with icons + links) */}
+        {/* Follow Along */}
         <section className="card" style={{ marginTop: 18, padding: 18 }}>
           <div style={{ display: "grid", gap: 12 }}>
             <div>
