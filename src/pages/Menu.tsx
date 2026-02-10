@@ -273,66 +273,64 @@ function SectionCard({
   onCustomize,
 }: MenuSection & { onCustomize: (item: MenuItem) => void }) {
   return (
-    <section className="card" style={{ padding: 18 }}>
-      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
+    <section className="card" style={{ padding: 14 }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
         <div>
-          <div style={{ fontWeight: 900, fontSize: 18 }}>{title}</div>
-          {subtitle && <div className="muted" style={{ marginTop: 6 }}>{subtitle}</div>}
+          <div style={{ fontWeight: 900, fontSize: 17, letterSpacing: -0.2 }}>{title}</div>
+          {subtitle ? (
+            <div className="muted" style={{ marginTop: 4, lineHeight: 1.35, fontSize: 13 }}>
+              {subtitle}
+            </div>
+          ) : null}
+        </div>
+
+        <div
+          style={{
+            color: "var(--gold2)",
+            fontWeight: 800,
+            fontSize: 12,
+            border: "1px solid var(--border)",
+            borderRadius: 9999,
+            padding: "5px 9px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Crafted fresh
         </div>
       </div>
 
-      <div
-        style={{
-          marginTop: 14,
-          display: "grid",
-          gap: 12,
-          gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-        }}
-      >
+      <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
         {items.map((it) => (
           <div
             key={it.id}
             style={{
               display: "grid",
-              gridTemplateRows: "140px auto",
-              borderRadius: 14,
-              overflow: "hidden",
+              gridTemplateColumns: "1fr auto",
+              gap: 10,
+              alignItems: "center",
+              padding: "10px 10px",
+              borderRadius: 12,
               border: "1px solid rgba(200, 155, 90, 0.18)",
               background: "rgba(18, 24, 36, 0.55)",
             }}
           >
-            <div
-              style={{
-                background: it.image
-                  ? `url(${it.image}) center / cover no-repeat`
-                  : "linear-gradient(135deg, rgba(200,155,90,0.25), rgba(200,155,90,0.05))",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "rgba(255,255,255,0.6)",
-                fontWeight: 800,
-                fontSize: 14,
-              }}
-            >
-              {!it.image && "Image coming soon"}
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontWeight: 850, lineHeight: 1.2 }}>{it.name}</div>
+              {it.desc ? (
+                <div className="muted" style={{ marginTop: 3, fontSize: 12.5, lineHeight: 1.35 }}>
+                  {it.desc}
+                </div>
+              ) : null}
             </div>
 
-            <div style={{ padding: 12, display: "grid", gap: 8 }}>
-              <div style={{ fontWeight: 800 }}>{it.name}</div>
-
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div style={{ color: "var(--gold2)", fontWeight: 900 }}>
-                  {formatPrice(it.price)}
-                </div>
-
-                <button
-                  className="btn"
-                  style={{ padding: "6px 10px", borderRadius: 10 }}
-                  onClick={() => onCustomize(it)}
-                >
-                  Customize
-                </button>
+            <div style={{ display: "grid", gap: 6, justifyItems: "end" }}>
+              <div style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
+                {formatPrice(it.price)}
               </div>
+
+              <button className="btn" style={{ padding: "7px 10px", borderRadius: 10 }} onClick={() => onCustomize(it)}>
+                Customize
+              </button>
             </div>
           </div>
         ))}
@@ -340,6 +338,7 @@ function SectionCard({
     </section>
   );
 }
+
 
 // -------------------- Page --------------------
 export default function Menu() {
@@ -374,10 +373,12 @@ export default function Menu() {
           style={{
             marginTop: 16,
             display: "grid",
-            gap: 14,
+            gap: 12,
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            alignItems: "start", // ✅ prevents cards from stretching tall
           }}
         >
+
           {sections.map((s) => (
             <SectionCard key={s.title} {...s} onCustomize={openCustomize} />
           ))}
