@@ -67,7 +67,7 @@ export default function PopUps() {
               }}
             />
             <div className="muted" style={{ marginTop: 10, lineHeight: 1.5 }}>
-        Be sure to check back for the next location & featured drinks!
+        
             </div>
           </div>
         </section>

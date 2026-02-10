@@ -84,7 +84,15 @@ export default function Home() {
         </section>
 
         {/* 3 cards (cleaned so Follow Along isn't duplicated) */}
-        <section style={{ marginTop: 18, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+        <section
+          style={{
+            marginTop: 18,
+            display: "grid",
+            gap: 14,
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          }}
+        >
+
           {[
             { title: "Featured Drinks", desc: "Top sellers + seasonal drops." },
             { title: "About", desc: "What “Pre & Post” means." },
