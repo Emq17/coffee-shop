@@ -117,7 +117,7 @@ export default function Home() {
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <a
-                className="btn btnPrimary"
+                className="btn"
                 href="https://www.instagram.com/preandpostcoffee/"
                 target="_blank"
                 rel="noreferrer"
