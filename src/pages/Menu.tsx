@@ -73,26 +73,7 @@ const sections: MenuSection[] = [
   },
 ];
 
-const milkChoices: MenuItem[] = [
-  { id: "milk-cow", name: "Cow Milk" },
-  { id: "milk-oat", name: "Oat Milk", price: 0.5 },
-  { id: "milk-almond", name: "Almond Milk", price: 0.5 },
-  { id: "milk-coconut", name: "Coconut Milk", price: 0.5 },
-];
 
-const addIns: MenuItem[] = [
-  { id: "addin-espresso-shot", name: "Shot of Espresso", price: 0.75 },
-  { id: "addin-cocoa-drizzle", name: "Cocoa Drizzle", price: 0.5 },
-  { id: "addin-caramel-drizzle", name: "Caramel Drizzle", price: 0.5 },
-  { id: "addin-cinnamon", name: "Cinnamon Powder", price: 0.1 },
-];
-
-const sweetCreamFoam: MenuItem[] = [
-  { id: "foam-matcha", name: "Matcha Cream Foam", price: 1.5 },
-  { id: "foam-mugwort", name: "Mugwort Cream Foam", price: 1.5 },
-  { id: "foam-spirulina", name: "Spirulina Cream Foam", price: 1.5 },
-  { id: "foam-vanilla", name: "Vanilla Cream Foam", price: 1 },
-];
 
 // -------------------- Helpers --------------------
 function formatMoney(n: number) {
@@ -104,9 +85,6 @@ function formatPrice(price?: Money) {
 }
 function makeLineId() {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
-}
-function toOption(it: MenuItem): CartOption {
-  return { id: it.id, name: it.name, price: it.price ?? 0 };
 }
 function itemTotal(base: number, milk?: CartOption, foam?: CartOption, addInsArr: CartOption[] = []) {
   const opts = (milk?.price ?? 0) + (foam?.price ?? 0) + addInsArr.reduce((s, a) => s + a.price, 0);
@@ -220,34 +198,19 @@ function CustomizeModal({
 }) {
   const cart = useCart();
 
-  const [milkId, setMilkId] = useState<string>("milk-cow");
-  const [foamId, setFoamId] = useState<string>("foam-none");
-  const [addInIds, setAddInIds] = useState<Record<string, boolean>>({});
-  const [notes, setNotes] = useState<string>("");
-  const [qty, setQty] = useState<number>(1);
+  const [qty] = useState<number>(1);
 
-  const foamOptions = useMemo(() => [{ id: "foam-none", name: "No Foam", price: 0 } as MenuItem, ...sweetCreamFoam], []);
-
-  const selectedMilk = useMemo(() => {
-    const m = milkChoices.find((x) => x.id === milkId);
-    return m ? toOption(m) : undefined;
-  }, [milkId]);
-
-  const selectedFoam = useMemo(() => {
-    if (foamId === "foam-none") return undefined;
-    const f = foamOptions.find((x) => x.id === foamId);
-    return f ? { id: f.id, name: f.name, price: f.price ?? 0 } : undefined;
-  }, [foamId, foamOptions]);
-
-  const selectedAddIns = useMemo(() => {
-    return addIns.filter((a) => Boolean(addInIds[a.id])).map((a) => toOption(a));
-  }, [addInIds]);
+  const selectedMilk = undefined;
+  const selectedFoam = undefined;
+  const selectedAddIns: CartOption[] = [];
+  const notes = "";
 
   const basePrice = item?.price ?? 0;
   const perItem = itemTotal(basePrice, selectedMilk, selectedFoam, selectedAddIns);
   const total = perItem * qty;
 
   if (!open || !item) return null;
+
 
   return (
     <div
