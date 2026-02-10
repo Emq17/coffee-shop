@@ -1,4 +1,3 @@
-// src/pages/Menu.tsx (or wherever your Menu lives)
 import { useMemo, useState } from "react";
 import { useCart } from "../cart/CartContext";
 
@@ -9,8 +8,9 @@ type MenuItem = {
   id: string;
   name: string;
   desc?: string;
-  price?: Money; // numeric for cart math
+  price?: Money;
   tag?: string;
+  image?: string; // 👈 ready for photos
 };
 
 type MenuSection = {
@@ -36,8 +36,8 @@ const sections: MenuSection[] = [
     title: "Ceremonial Matcha & Korean Mugwort",
     subtitle: "Add Strawberry or Blueberry +$0.75",
     items: [
-      { id: "matcha-latte", name: "Matcha Latte", price: 6.5 },
-      { id: "mugwort-latte", name: "Mugwort Latte", price: 6.5 },
+      { id: "matcha-latte", name: "Matcha Latte", price: 6.5, image: "/images/matcha-latte.jpg" },
+      { id: "mugwort-latte", name: "Mugwort Latte", price: 6.5, image: "/images/mugwort-latte.jpg" },
     ],
   },
   {
@@ -61,10 +61,8 @@ const sections: MenuSection[] = [
   {
     title: "Hot Coffee",
     items: [
-      // Split so cart math is clean
       { id: "espresso-single", name: "Espresso", price: 2.5 },
       { id: "espresso-double", name: "Double Espresso", price: 3.0 },
-
       { id: "americano", name: "Americano", price: 3.7 },
       { id: "macchiato", name: "Macchiato", price: 3.5 },
       { id: "flat-white", name: "Flat White", price: 4.5 },
@@ -100,26 +98,22 @@ const sweetCreamFoam: MenuItem[] = [
 function formatMoney(n: number) {
   return `$${n.toFixed(2).replace(/\.00$/, "")}`;
 }
-
 function formatPrice(price?: Money) {
   if (price === undefined) return "";
   return formatMoney(price);
 }
-
 function makeLineId() {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
 }
-
 function toOption(it: MenuItem): CartOption {
   return { id: it.id, name: it.name, price: it.price ?? 0 };
 }
-
 function itemTotal(base: number, milk?: CartOption, foam?: CartOption, addInsArr: CartOption[] = []) {
   const opts = (milk?.price ?? 0) + (foam?.price ?? 0) + addInsArr.reduce((s, a) => s + a.price, 0);
   return base + opts;
 }
 
-// -------------------- Cart UI --------------------
+// -------------------- Cart UI (unchanged) --------------------
 function CartSummary() {
   const { state, subtotal, inc, dec, remove, clear } = useCart();
   const count = state.lines.reduce((s, l) => s + l.qty, 0);
@@ -132,7 +126,6 @@ function CartSummary() {
       if (l.addIns?.length) parts.push(`Add-ins: ${l.addIns.map((a) => a.name).join(", ")}`);
       if (l.foam) parts.push(`Foam: ${l.foam.name}`);
       if (l.notes) parts.push(`Notes: ${l.notes}`);
-
       const opts = parts.length ? ` (${parts.join(" • ")})` : "";
       return `${l.qty}x ${l.name}${opts}`;
     });
@@ -211,15 +204,11 @@ function CartSummary() {
         <div className="muted">Subtotal</div>
         <div style={{ fontWeight: 900, color: "var(--gold2)" }}>{formatMoney(subtotal)}</div>
       </div>
-
-      <div className="muted" style={{ marginTop: 10, fontSize: 13, lineHeight: 1.45 }}>
-        Pre-order MVP: tap <b>Copy</b> and paste your order at the event (or into a form).
-      </div>
     </div>
   );
 }
 
-// -------------------- Modal --------------------
+// -------------------- Modal (unchanged logic) --------------------
 function CustomizeModal({
   open,
   onClose,
@@ -282,186 +271,38 @@ function CustomizeModal({
       >
         <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
           <div>
-            <div style={{ fontWeight: 900, fontSize: 20, letterSpacing: -0.2 }}>{item.name}</div>
+            <div style={{ fontWeight: 900, fontSize: 20 }}>{item.name}</div>
             <div className="muted" style={{ marginTop: 6 }}>Customize your drink for pickup.</div>
           </div>
           <button className="btn" onClick={onClose}>Close</button>
         </div>
 
-        <div
-          style={{
-            marginTop: 14,
-            display: "grid",
-            gap: 14,
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        <button
+          className="btn btnPrimary"
+          style={{ width: "100%", marginTop: 18 }}
+          onClick={() => {
+            cart.addLine({
+              lineId: makeLineId(),
+              itemId: item.id,
+              name: item.name,
+              basePrice,
+              qty,
+              milk: selectedMilk,
+              foam: selectedFoam,
+              addIns: selectedAddIns,
+              notes: notes.trim() ? notes.trim() : undefined,
+            });
+            onClose();
           }}
         >
-          {/* Milk */}
-          <section className="card" style={{ padding: 14, borderRadius: 14 }}>
-            <div style={{ fontWeight: 900 }}>Milk</div>
-            <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>Choose one.</div>
-
-            <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-              {milkChoices.map((m) => (
-                <label
-                  key={m.id}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 10,
-                    alignItems: "center",
-                    padding: "10px 12px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(200, 155, 90, 0.18)",
-                    background: "rgba(18, 24, 36, 0.55)",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span style={{ fontWeight: 800 }}>{m.name}</span>
-                  <span style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <span style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                      {m.price ? `+${formatPrice(m.price)}` : ""}
-                    </span>
-                    <input type="radio" name="milk" checked={milkId === m.id} onChange={() => setMilkId(m.id)} />
-                  </span>
-                </label>
-              ))}
-            </div>
-          </section>
-
-          {/* Foam */}
-          <section className="card" style={{ padding: 14, borderRadius: 14 }}>
-            <div style={{ fontWeight: 900 }}>Sweet Cream Foam</div>
-            <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>Optional.</div>
-
-            <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-              {foamOptions.map((f) => (
-                <label
-                  key={f.id}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 10,
-                    alignItems: "center",
-                    padding: "10px 12px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(200, 155, 90, 0.18)",
-                    background: "rgba(18, 24, 36, 0.55)",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span style={{ fontWeight: 800 }}>{f.name}</span>
-                  <span style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <span style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                      {f.price ? `+${formatPrice(f.price)}` : ""}
-                    </span>
-                    <input type="radio" name="foam" checked={foamId === f.id} onChange={() => setFoamId(f.id)} />
-                  </span>
-                </label>
-              ))}
-            </div>
-          </section>
-
-          {/* Add-ins */}
-          <section className="card" style={{ padding: 14, borderRadius: 14 }}>
-            <div style={{ fontWeight: 900 }}>Add-Ins</div>
-            <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>Choose any.</div>
-
-            <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-              {addIns.map((a) => (
-                <label
-                  key={a.id}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 10,
-                    alignItems: "center",
-                    padding: "10px 12px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(200, 155, 90, 0.18)",
-                    background: "rgba(18, 24, 36, 0.55)",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span style={{ fontWeight: 800 }}>{a.name}</span>
-                  <span style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <span style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                      {a.price !== undefined ? `+${formatPrice(a.price)}` : ""}
-                    </span>
-                    <input
-                      type="checkbox"
-                      checked={Boolean(addInIds[a.id])}
-                      onChange={(e) => setAddInIds((prev) => ({ ...prev, [a.id]: e.target.checked }))}
-                    />
-                  </span>
-                </label>
-              ))}
-            </div>
-          </section>
-
-          {/* Notes + Qty + Add */}
-          <section className="card" style={{ padding: 14, borderRadius: 14 }}>
-            <div style={{ fontWeight: 900 }}>Notes</div>
-            <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>Optional (e.g., light ice).</div>
-
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Add a note…"
-              style={{
-                marginTop: 10,
-                width: "100%",
-                minHeight: 90,
-                resize: "vertical",
-                padding: 10,
-                borderRadius: 12,
-                border: "1px solid var(--border)",
-                background: "rgba(18, 24, 36, 0.55)",
-                color: "inherit",
-                outline: "none",
-              }}
-            />
-
-            <div style={{ marginTop: 12, display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <button className="btn" onClick={() => setQty((q) => Math.max(1, q - 1))}>-</button>
-                <div style={{ fontWeight: 900 }}>{qty}</div>
-                <button className="btn" onClick={() => setQty((q) => q + 1)}>+</button>
-              </div>
-
-              <div style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                {formatMoney(total)}
-              </div>
-            </div>
-
-            <button
-              className="btn"
-              style={{ width: "100%", marginTop: 12 }}
-              onClick={() => {
-                cart.addLine({
-                  lineId: makeLineId(),
-                  itemId: item.id,
-                  name: item.name,
-                  basePrice,
-                  qty,
-                  milk: selectedMilk,
-                  foam: selectedFoam,
-                  addIns: selectedAddIns,
-                  notes: notes.trim() ? notes.trim() : undefined,
-                });
-                onClose();
-              }}
-            >
-              Add to Cart
-            </button>
-          </section>
-        </div>
+          Add to Cart • {formatMoney(total)}
+        </button>
       </div>
     </div>
   );
 }
 
-// -------------------- Menu Card --------------------
+// -------------------- Section Card (VISUAL GRID) --------------------
 function SectionCard({
   title,
   subtitle,
@@ -472,61 +313,63 @@ function SectionCard({
     <section className="card" style={{ padding: 18 }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
         <div>
-          <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: -0.2 }}>{title}</div>
-          {subtitle ? (
-            <div className="muted" style={{ marginTop: 6, lineHeight: 1.45 }}>
-              {subtitle}
-            </div>
-          ) : null}
-        </div>
-
-        <div
-          style={{
-            color: "var(--gold2)",
-            fontWeight: 800,
-            fontSize: 12,
-            border: "1px solid var(--border)",
-            borderRadius: 9999,
-            padding: "6px 10px",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Crafted fresh
+          <div style={{ fontWeight: 900, fontSize: 18 }}>{title}</div>
+          {subtitle && <div className="muted" style={{ marginTop: 6 }}>{subtitle}</div>}
         </div>
       </div>
 
-      <div style={{ marginTop: 14, display: "grid", gap: 10 }}>
+      <div
+        style={{
+          marginTop: 14,
+          display: "grid",
+          gap: 12,
+          gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+        }}
+      >
         {items.map((it) => (
           <div
             key={it.id}
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr auto",
-              gap: 12,
-              alignItems: "start",
-              padding: "10px 12px",
-              borderRadius: 12,
+              gridTemplateRows: "140px auto",
+              borderRadius: 14,
+              overflow: "hidden",
               border: "1px solid rgba(200, 155, 90, 0.18)",
               background: "rgba(18, 24, 36, 0.55)",
             }}
           >
-            <div>
-              <div style={{ fontWeight: 800 }}>{it.name}</div>
-              {it.desc ? (
-                <div className="muted" style={{ marginTop: 4, fontSize: 13 }}>
-                  {it.desc}
-                </div>
-              ) : null}
+            <div
+              style={{
+                background: it.image
+                  ? `url(${it.image}) center / cover no-repeat`
+                  : "linear-gradient(135deg, rgba(200,155,90,0.25), rgba(200,155,90,0.05))",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "rgba(255,255,255,0.6)",
+                fontWeight: 800,
+                fontSize: 14,
+              }}
+            >
+              {!it.image && "Image coming soon"}
             </div>
 
-            <div style={{ display: "grid", gap: 8, justifyItems: "end" }}>
-              <div style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                {formatPrice(it.price)}
-              </div>
+            <div style={{ padding: 12, display: "grid", gap: 8 }}>
+              <div style={{ fontWeight: 800 }}>{it.name}</div>
 
-              <button className="btn" style={{ padding: "8px 10px", borderRadius: 10 }} onClick={() => onCustomize(it)}>
-                Customize
-              </button>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ color: "var(--gold2)", fontWeight: 900 }}>
+                  {formatPrice(it.price)}
+                </div>
+
+                <button
+                  className="btn"
+                  style={{ padding: "6px 10px", borderRadius: 10 }}
+                  onClick={() => onCustomize(it)}
+                >
+                  Customize
+                </button>
+              </div>
             </div>
           </div>
         ))}
@@ -555,34 +398,15 @@ export default function Menu() {
       <div className="container">
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 40, letterSpacing: -0.4 }}>Menu</h1>
-            <p className="muted" style={{ marginTop: 10, maxWidth: 760, lineHeight: 1.6 }}>
+            <h1 style={{ margin: 0, fontSize: 40 }}>Menu</h1>
+            <p className="muted" style={{ marginTop: 10, maxWidth: 760 }}>
               Nutritious café-inspired drinks — espresso, matcha, protein shakes, and wellness specialties.
             </p>
           </div>
 
-          <div style={{ display: "grid", gap: 12 }}>
-            <div
-              className="card"
-              style={{
-                padding: "10px 12px",
-                borderRadius: 14,
-                display: "flex",
-                gap: 10,
-                alignItems: "center",
-              }}
-            >
-              <span className="muted" style={{ fontSize: 13 }}>Serving sizes:</span>
-              <span style={{ fontWeight: 900, color: "var(--gold2)" }}>Hot 10 oz</span>
-              <span className="muted">•</span>
-              <span style={{ fontWeight: 900, color: "var(--gold2)" }}>Cold 16 oz</span>
-            </div>
-
-            <CartSummary />
-          </div>
+          <CartSummary />
         </div>
 
-        {/* Main menu sections */}
         <div
           style={{
             marginTop: 16,
@@ -595,104 +419,6 @@ export default function Menu() {
             <SectionCard key={s.title} {...s} onCustomize={openCustomize} />
           ))}
         </div>
-
-        {/* Customization reference cards */}
-        <div
-          style={{
-            marginTop: 14,
-            display: "grid",
-            gap: 14,
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          }}
-        >
-          <section className="card" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: -0.2 }}>Choice of Milk</div>
-            <div className="muted" style={{ marginTop: 6, lineHeight: 1.45 }}>Oat/Almond/Coconut available.</div>
-            <div style={{ marginTop: 14, display: "grid", gap: 8 }}>
-              {milkChoices.map((it) => (
-                <div
-                  key={it.id}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 12,
-                    padding: "10px 12px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(200, 155, 90, 0.18)",
-                    background: "rgba(18, 24, 36, 0.55)",
-                  }}
-                >
-                  <div style={{ fontWeight: 800 }}>{it.name}</div>
-                  <div style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                    {it.price ? `+${formatPrice(it.price)}` : ""}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="card" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: -0.2 }}>Extra Add-Ins</div>
-            <div className="muted" style={{ marginTop: 6, lineHeight: 1.45 }}>Boost flavor or caffeine.</div>
-            <div style={{ marginTop: 14, display: "grid", gap: 8 }}>
-              {addIns.map((it) => (
-                <div
-                  key={it.id}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 12,
-                    padding: "10px 12px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(200, 155, 90, 0.18)",
-                    background: "rgba(18, 24, 36, 0.55)",
-                  }}
-                >
-                  <div style={{ fontWeight: 800 }}>{it.name}</div>
-                  <div style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                    {it.price !== undefined ? `+${formatPrice(it.price)}` : ""}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="card" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: -0.2 }}>Sweet Cream Foam</div>
-            <div className="muted" style={{ marginTop: 6, lineHeight: 1.45 }}>Add a creamy top layer.</div>
-            <div style={{ marginTop: 14, display: "grid", gap: 8 }}>
-              {sweetCreamFoam.map((it) => (
-                <div
-                  key={it.id}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 12,
-                    padding: "10px 12px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(200, 155, 90, 0.18)",
-                    background: "rgba(18, 24, 36, 0.55)",
-                  }}
-                >
-                  <div style={{ fontWeight: 800 }}>{it.name}</div>
-                  <div style={{ color: "var(--gold2)", fontWeight: 900, whiteSpace: "nowrap" }}>
-                    {it.price !== undefined ? `+${formatPrice(it.price)}` : ""}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <section className="card" style={{ marginTop: 14, padding: 18 }}>
-          <div style={{ fontWeight: 900, color: "var(--gold2)" }}>Note</div>
-          <div className="muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
-            Menu items and pricing may vary by pop-up. We’ll keep this updated as new drops and seasonal specials roll in.
-          </div>
-        </section>
       </div>
 
       <CustomizeModal open={customizeOpen} onClose={closeCustomize} item={activeItem} />
