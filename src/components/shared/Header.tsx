@@ -126,15 +126,7 @@ export default function Header() {
             </NavLink>
           ))}
 
-          <a
-            className="btn btnPrimary"
-            href="https://www.instagram.com/preandpostcoffee/"
-            target="_blank"
-            rel="noreferrer"
-            style={{ padding: "10px 14px" }}
-          >
-            Instagram
-          </a>
+        
         </nav>
 
         {/* Mobile hamburger (hidden on desktop) */}
@@ -204,20 +196,7 @@ export default function Header() {
               </NavLink>
             ))}
 
-            <a
-              className="btn btnPrimary"
-              href="https://www.instagram.com/preandpostcoffee/"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                padding: "12px 14px",
-                borderRadius: 16,
-                textAlign: "center",
-                textDecoration: "none",
-              }}
-            >
-              Instagram
-            </a>
+
           </div>
         </div>
       )}
