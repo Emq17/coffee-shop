@@ -1,5 +1,3 @@
-// src/pages/About.tsx
-
 export default function About() {
   return (
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
@@ -13,61 +11,21 @@ export default function About() {
             background: "var(--surface2)",
           }}
         >
-          <div
-            className="aboutHeroGrid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: 16,
-              alignItems: "center",
-            }}
-          >
+          <div className="aboutHeroGrid">
             {/* Image */}
-            <div
-              className="aboutHeroMedia"
-              style={{
-                position: "relative",
-                borderRadius: 16,
-                overflow: "hidden",
-                border: "1px solid var(--border)",
-                background: "var(--surface)",
-                minHeight: 260,
-              }}
-            >
+            <div className="aboutImgWrap">
               <img
                 src="/images/about/pop-up-team.jpg"
                 alt="Pre & Post pop-up setup at Crunch — serving coffee and matcha."
-                className="aboutHeroImage"
+                className="aboutImg"
               />
 
-              {/* Overlay for readability */}
-              <div className="aboutHeroOverlay" />
+              {/* Overlay for readability (bottom fade, not darkening whole image) */}
+              <div className="aboutImgOverlay" />
 
               {/* Caption */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: 14,
-                  bottom: 12,
-                  right: 14,
-                  display: "flex",
-                  gap: 10,
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                }}
-              >
-                <span
-                  style={{
-                    border: "1px solid var(--border)",
-                    padding: "6px 10px",
-                    borderRadius: 999,
-                    background: "rgba(0,0,0,0.45)",
-                    fontWeight: 800,
-                    fontSize: 12,
-                  }}
-                >
-                  Pop-up life
-                </span>
+              <div className="aboutCaption">
+                <span className="aboutChip">Pop-up life</span>
                 <span className="muted" style={{ fontSize: 12 }}>
                   Serving Central Florida — one stop at a time.
                 </span>
@@ -75,78 +33,25 @@ export default function About() {
             </div>
 
             {/* Text */}
-            <div
-              style={{
-                maxWidth: 560,
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
+            <div className="aboutTextWrap">
               {/* ABOUT US SIGN */}
-              <div
-                className="handwrite"
-                style={{
-                  fontSize: 56,
-                  fontWeight: 900,
-                  letterSpacing: -0.4,
-                  lineHeight: 1,
-                  transform: "none",
-                  opacity: 1,
-                  alignSelf: "center",
-                  textAlign: "center",
-                  margin: 0,
-                  marginBottom: 10,
-                }}
-              >
-                ABOUT US
-              </div>
+              <div className="handwrite aboutSign">ABOUT US</div>
 
-              {/* Our story pills */}
-              <div
-                style={{
-                  display: "inline-flex",
-                  gap: 10,
-                  alignItems: "center",
-                  marginBottom: 10,
-                }}
-              >
-                <span
-                  style={{
-                    padding: "6px 10px",
-                    borderRadius: 9999,
-                    border: "1px solid var(--border)",
-                    color: "var(--gold)",
-                    fontWeight: 900,
-                    fontSize: 13,
-                  }}
-                >
-                  Our story
-                </span>
+              <div className="aboutMetaRow">
+                <span className="aboutPill">Our story</span>
                 <span className="muted" style={{ fontSize: 13 }}>
                   Coffee • Matcha • Protein
                 </span>
               </div>
 
-              <h1
-                style={{
-                  margin: 0,
-                  fontSize: 44,
-                  letterSpacing: -0.6,
-                  lineHeight: 1.05,
-                }}
-              >
-                A pop-up café built for the before and after.
-              </h1>
+              <h1 className="aboutTitle">A pop-up café built for the before and after.</h1>
 
-              <p className="muted" style={{ marginTop: 12, lineHeight: 1.7 }}>
+              <p className="muted aboutBody">
                 Pre &amp; Post is for the moments that matter — before work, before training, after
-                training, after a long day. We keep it simple: drinks that taste good and feel
-                clean.
+                training, after a long day. We keep it simple: drinks that taste good and feel clean.
               </p>
 
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
+              <div className="aboutCtas">
                 <a className="btn btnPrimary" href="/menu">
                   View Menu
                 </a>
@@ -160,45 +65,149 @@ export default function About() {
             </div>
           </div>
 
-          {/* Responsive rules (desktop + mobile crop behavior) */}
           <style>{`
-            .aboutHeroImage{
+            /* --- HERO LAYOUT --- */
+            .aboutHeroGrid{
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: 16px;
+              align-items: center;
+            }
+
+            /* Desktop/tablet: 2-column like you already had */
+            @media (min-width: 980px){
+              .aboutHeroGrid{
+                grid-template-columns: 1.1fr 0.9fr;
+              }
+            }
+
+            /* --- IMAGE --- */
+            .aboutImgWrap{
+              position: relative;
+              border-radius: 16px;
+              overflow: hidden;
+              border: 1px solid var(--border);
+              background: var(--surface);
+              min-height: 260px;
+            }
+
+            .aboutImg{
               width: 100%;
               height: 100%;
               display: block;
               object-fit: cover;
-              object-position: 50% 32%;
-              filter: brightness(1.12) contrast(1.02) saturate(1.02);
+
+              /* "not zoomed in" feel: keep faces & logo visible */
+              object-position: 50% 18%;
+
+              /* brighten like you wanted */
+              filter: brightness(1.08) contrast(1.02) saturate(1.02);
             }
 
-            .aboutHeroOverlay{
+            /* Bottom fade only (keeps image from looking dark overall) */
+            .aboutImgOverlay{
               position: absolute;
               inset: 0;
-              background: linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%);
               pointer-events: none;
+              background: linear-gradient(
+                180deg,
+                rgba(0,0,0,0.00) 55%,
+                rgba(0,0,0,0.55) 100%
+              );
             }
 
-            @media (min-width: 980px){
-              .aboutHeroGrid{
-                grid-template-columns: 1.1fr 0.9fr !important;
-              }
+            .aboutCaption{
+              position: absolute;
+              left: 14px;
+              right: 14px;
+              bottom: 12px;
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              align-items: center;
             }
 
-            /* ✅ Mobile: bigger image box but NOT zoomed in */
-            @media (max-width: 640px){
-              .aboutHeroMedia{
-                min-height: 520px !important;   /* bigger */
-                background: #0b0b0b;            /* fills behind "contain" */
+            .aboutChip{
+              border: 1px solid var(--border);
+              padding: 6px 10px;
+              border-radius: 999px;
+              background: rgba(0,0,0,0.45);
+              font-weight: 800;
+              font-size: 12px;
+            }
+
+            /* --- TEXT --- */
+            .aboutTextWrap{
+              max-width: 560px;
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+
+            .aboutSign{
+              font-size: 56px;
+              font-weight: 900;
+              letter-spacing: -0.4px;
+              line-height: 1;
+              transform: none; /* straight */
+              opacity: 1;
+              align-self: center;
+              text-align: center;
+              margin: 0 0 10px 0;
+            }
+
+            .aboutMetaRow{
+              display: inline-flex;
+              gap: 10px;
+              align-items: center;
+              margin-bottom: 10px;
+            }
+
+            .aboutPill{
+              padding: 6px 10px;
+              border-radius: 9999px;
+              border: 1px solid var(--border);
+              color: var(--gold);
+              font-weight: 900;
+              font-size: 13px;
+            }
+
+            .aboutTitle{
+              margin: 0;
+              font-size: 44px;
+              letter-spacing: -0.6px;
+              line-height: 1.05;
+            }
+
+            .aboutBody{
+              margin-top: 12px;
+              line-height: 1.7;
+            }
+
+            .aboutCtas{
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              margin-top: 14px;
+            }
+
+            /* --- MOBILE: keep it "like desktop", but control the photo size --- */
+            @media (max-width: 520px){
+              /* make the image big, but NOT huge/tall */
+              .aboutImgWrap{
+                min-height: 0;
+                height: clamp(320px, 48vh, 420px);
               }
 
-              .aboutHeroImage{
-                object-fit: contain !important; /* no crop */
-                object-position: center !important;
-                filter: brightness(1.14) contrast(1.02) saturate(1.02) !important;
+              /* keep everything feeling balanced */
+              .aboutSign{
+                font-size: 50px;
+                margin-bottom: 12px;
               }
 
-              .aboutHeroOverlay{
-                background: linear-gradient(180deg, rgba(0,0,0,0.00) 65%, rgba(0,0,0,0.45) 100%) !important;
+              .aboutTitle{
+                font-size: 40px;
               }
             }
           `}</style>
@@ -214,13 +223,13 @@ export default function About() {
             </p>
 
             <div
-              className="aboutCards"
               style={{
                 marginTop: 14,
                 display: "grid",
                 gap: 12,
                 gridTemplateColumns: "1fr",
               }}
+              className="aboutCards"
             >
               <div className="card" style={{ padding: 14, background: "var(--surface)" }}>
                 <div style={{ fontWeight: 900 }}>Taste first</div>
@@ -246,9 +255,7 @@ export default function About() {
 
             <style>{`
               @media (min-width: 900px){
-                .aboutCards{
-                  grid-template-columns: repeat(3, 1fr) !important;
-                }
+                .aboutCards{ grid-template-columns: repeat(3, 1fr) !important; }
               }
             `}</style>
           </div>
@@ -263,20 +270,10 @@ export default function About() {
             </p>
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-              <a
-                className="btn"
-                href="https://instagram.com/yourhandle"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer">
                 Instagram
               </a>
-              <a
-                className="btn"
-                href="https://tiktok.com/@preandpostcoffee"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
                 TikTok
               </a>
             </div>
