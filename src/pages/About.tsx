@@ -40,16 +40,8 @@ export default function About() {
                 className="aboutHeroImage"
               />
 
-              {/* Overlay for readability (the one you liked) */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%)",
-                  pointerEvents: "none",
-                }}
-              />
+              {/* Overlay for readability */}
+              <div className="aboutHeroOverlay" />
 
               {/* Caption */}
               <div
@@ -111,13 +103,13 @@ export default function About() {
                 ABOUT US
               </div>
 
+              {/* Our story pills */}
               <div
                 style={{
                   display: "inline-flex",
                   gap: 10,
                   alignItems: "center",
                   marginBottom: 10,
-                  flexWrap: "wrap",
                 }}
               >
                 <span
@@ -137,13 +129,21 @@ export default function About() {
                 </span>
               </div>
 
-              <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.6, lineHeight: 1.05 }}>
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: 44,
+                  letterSpacing: -0.6,
+                  lineHeight: 1.05,
+                }}
+              >
                 A pop-up café built for the before and after.
               </h1>
 
               <p className="muted" style={{ marginTop: 12, lineHeight: 1.7 }}>
                 Pre &amp; Post is for the moments that matter — before work, before training, after
-                training, after a long day. We keep it simple: drinks that taste good and feel clean.
+                training, after a long day. We keep it simple: drinks that taste good and feel
+                clean.
               </p>
 
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
@@ -160,35 +160,45 @@ export default function About() {
             </div>
           </div>
 
-          {/* Responsive layout + image tuning */}
+          {/* Responsive rules (desktop + mobile crop behavior) */}
           <style>{`
             .aboutHeroImage{
               width: 100%;
               height: 100%;
-              object-fit: cover;
               display: block;
+              object-fit: cover;
               object-position: 50% 32%;
-
-              /* ✅ BRIGHTEN (like your version, just a bit stronger) */
               filter: brightness(1.12) contrast(1.02) saturate(1.02);
             }
 
-            /* Desktop: side-by-side */
+            .aboutHeroOverlay{
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%);
+              pointer-events: none;
+            }
+
             @media (min-width: 980px){
               .aboutHeroGrid{
                 grid-template-columns: 1.1fr 0.9fr !important;
               }
             }
 
-            /* Mobile: keep stacked like before, just "zoom out" a little */
+            /* ✅ Mobile: bigger image box but NOT zoomed in */
             @media (max-width: 640px){
               .aboutHeroMedia{
-                min-height: 360px !important; /* smaller so it feels zoomed out */
+                min-height: 520px !important;   /* bigger */
+                background: #0b0b0b;            /* fills behind "contain" */
               }
 
               .aboutHeroImage{
-                object-position: 50% 24% !important; /* show a bit more */
+                object-fit: contain !important; /* no crop */
+                object-position: center !important;
                 filter: brightness(1.14) contrast(1.02) saturate(1.02) !important;
+              }
+
+              .aboutHeroOverlay{
+                background: linear-gradient(180deg, rgba(0,0,0,0.00) 65%, rgba(0,0,0,0.45) 100%) !important;
               }
             }
           `}</style>
@@ -253,10 +263,20 @@ export default function About() {
             </p>
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-              <a className="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer">
+              <a
+                className="btn"
+                href="https://instagram.com/yourhandle"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Instagram
               </a>
-              <a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
+              <a
+                className="btn"
+                href="https://tiktok.com/@preandpostcoffee"
+                target="_blank"
+                rel="noreferrer"
+              >
                 TikTok
               </a>
             </div>
