@@ -24,6 +24,7 @@ export default function About() {
           >
             {/* Image */}
             <div
+              className="aboutHeroMedia"
               style={{
                 position: "relative",
                 borderRadius: 16,
@@ -39,13 +40,13 @@ export default function About() {
                 className="aboutHeroImage"
               />
 
-              {/* Overlay for readability */}
+              {/* Overlay for readability (the one you liked) */}
               <div
                 style={{
                   position: "absolute",
                   inset: 0,
                   background:
-                    "linear-gradient(90deg, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.08) 100%)",
+                    "linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%)",
                   pointerEvents: "none",
                 }}
               />
@@ -142,8 +143,7 @@ export default function About() {
 
               <p className="muted" style={{ marginTop: 12, lineHeight: 1.7 }}>
                 Pre &amp; Post is for the moments that matter — before work, before training, after
-                training, after a long day. We keep it simple: drinks that taste good and feel
-                clean.
+                training, after a long day. We keep it simple: drinks that taste good and feel clean.
               </p>
 
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
@@ -160,49 +160,35 @@ export default function About() {
             </div>
           </div>
 
-          {/* Responsive layout + mobile crop */}
+          {/* Responsive layout + image tuning */}
           <style>{`
-            /* Image defaults (all sizes) */
             .aboutHeroImage{
               width: 100%;
               height: 100%;
               object-fit: cover;
-              object-position: 50% 32%;
               display: block;
-              /* slightly brighter so it doesn't feel "dark" */
-              filter: brightness(1.06) contrast(1.03) saturate(1.03);
+              object-position: 50% 32%;
+
+              /* ✅ BRIGHTEN (like your version, just a bit stronger) */
+              filter: brightness(1.12) contrast(1.02) saturate(1.02);
             }
 
-            /* Desktop: two columns */
+            /* Desktop: side-by-side */
             @media (min-width: 980px){
               .aboutHeroGrid{
                 grid-template-columns: 1.1fr 0.9fr !important;
               }
             }
 
-            /* Mobile: keep SAME layout style, just shrink/crop image */
+            /* Mobile: keep stacked like before, just "zoom out" a little */
             @media (max-width: 640px){
-              .aboutHeroGrid{
-                /* still two columns, but tighter so it resembles desktop */
-                grid-template-columns: 0.95fr 1.05fr !important;
-                gap: 12px !important;
+              .aboutHeroMedia{
+                min-height: 360px !important; /* smaller so it feels zoomed out */
               }
 
-              /* slightly smaller overall text column */
-              .aboutHeroGrid > div:last-child{
-                max-width: 520px !important;
-              }
-
-              /* crop up a bit more on mobile so faces/logo stay in view */
               .aboutHeroImage{
-                object-position: 50% 22%;
-              }
-            }
-
-            /* Super small phones: allow stacking to avoid unreadable text */
-            @media (max-width: 390px){
-              .aboutHeroGrid{
-                grid-template-columns: 1fr !important;
+                object-position: 50% 24% !important; /* show a bit more */
+                filter: brightness(1.14) contrast(1.02) saturate(1.02) !important;
               }
             }
           `}</style>
@@ -267,10 +253,10 @@ export default function About() {
             </p>
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-              <a className="btn" href="https://instagram.com" target="_blank" rel="noreferrer">
+              <a className="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer">
                 Instagram
               </a>
-              <a className="btn" href="https://tiktok.com" target="_blank" rel="noreferrer">
+              <a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
                 TikTok
               </a>
             </div>
