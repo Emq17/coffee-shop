@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 export default function About() {
   return (
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
