@@ -380,8 +380,7 @@ function DrinkInfoModal({
             height: 220,
             borderRadius: 14,
             border: "1px solid var(--border)",
-            background:
-              "radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(255,255,255,0.03))",
+            background: "rgba(255,255,255,0.03)",
             display: "grid",
             placeItems: "center",
             opacity: 0.85,

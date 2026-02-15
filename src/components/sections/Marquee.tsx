@@ -9,7 +9,7 @@ export default function Marquee({
         style={{
           borderTop: "1px solid var(--border)",
           borderBottom: "1px solid var(--border)",
-          background: "rgba(18, 24, 36, 0.35)",
+          background: "rgba(20, 20, 20, 0.90)",
           overflow: "hidden",
         }}
       >

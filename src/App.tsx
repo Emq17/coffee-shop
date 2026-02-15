@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import PopUps from "./pages/PopUps";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
+
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/pop-ups" element={<PopUps />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+
       </Routes>
     </>
   );
