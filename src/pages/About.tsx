@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function About() {
   return (
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
@@ -231,12 +232,12 @@ export default function About() {
             </p>
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-              <a className="btn" href="#" onClick={(e) => e.preventDefault()}>
-                Instagram
-              </a>
-              <a className="btn" href="#" onClick={(e) => e.preventDefault()}>
-                TikTok
-              </a>
+              <a className="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer">
+  Instagram
+</a>
+<a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
+  TikTok
+</a>
             </div>
           </div>
         </section>
