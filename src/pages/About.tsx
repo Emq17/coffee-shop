@@ -45,14 +45,15 @@ export default function About() {
               />
 
               {/* Overlay for readability */}
-              <div
+                <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.10) 100%)",
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                    "linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%)",
+                    pointerEvents: "none",
                 }}
-              />
+                />
 
               {/* Caption */}
               <div
@@ -233,11 +234,11 @@ export default function About() {
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
               <a className="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer">
-  Instagram
-</a>
-<a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
-  TikTok
-</a>
+                Instagram
+                </a>
+                <a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
+                TikTok
+                </a>
             </div>
           </div>
         </section>
