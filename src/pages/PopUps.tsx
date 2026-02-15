@@ -28,13 +28,13 @@ export default function PopUps() {
 
             <div className="muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
               <div>
-                <b>Date:</b> 2/11/2026
+                <b>Date:</b> 2/28/2026
               </div>
               <div>
                 <b>Hours:</b> 9:00am – 1:00pm EST
               </div>
               <div>
-                <b>Location:</b> Crunch Fitness Lake Nona — 11926 Narcoossee Rd, Suite 100, Orlando, FL, 32832
+                <b>Location:</b> Crunch Fitness Kissimmee — 850 Osceola Pkwy, Kissimmee, FL 34741
               </div>
             </div>
 

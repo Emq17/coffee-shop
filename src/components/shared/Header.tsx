@@ -5,8 +5,9 @@ export default function Header() {
   const nav = [
     { label: "Home", to: "/home" },
     { label: "Menu", to: "/menu" },
+    { label: "About", to: "/about" },
     { label: "Pop-Ups", to: "/pop-ups" },
-    { label: "Contact", to: "/contact" },
+    { label: "Contact Us", to: "/contact" },
   ];
 
   const [open, setOpen] = useState(false);
@@ -25,9 +26,10 @@ export default function Header() {
         left: 0,
         width: "100%",
         zIndex: 50,
-        backdropFilter: "blur(10px)",
-        background: "rgba(11, 15, 20, 0.78)",
+        background: "var(--surface)", // ✅ flat charcoal
         borderBottom: "1px solid var(--border)",
+        backdropFilter: "none",
+        WebkitBackdropFilter: "none",
       }}
     >
       <div
@@ -54,13 +56,13 @@ export default function Header() {
         >
           <img
             src="/android-chrome-192x192.png"
-            alt="Pre & Post Coffee Shop"
+            alt="Pre & Post Coffee"
             style={{
               width: 42,
               height: 42,
               borderRadius: 9999,
               border: "1px solid var(--border)",
-              background: "rgba(18, 24, 36, 0.35)",
+              background: "var(--surface2)",
               display: "block",
               flex: "0 0 auto",
             }}
@@ -76,7 +78,7 @@ export default function Header() {
                 textOverflow: "ellipsis",
               }}
             >
-              Pre &amp; Post Coffee Shop
+              Pre &amp; Post Coffee
             </div>
             <div
               className="muted"
@@ -112,9 +114,9 @@ export default function Header() {
                 padding: "10px 12px",
                 borderRadius: 9999,
                 border: `1px solid ${
-                  isActive ? "rgba(226, 185, 121, 0.55)" : "var(--border)"
+                  isActive ? "var(--activeBorder)" : "var(--border)"
                 }`,
-                background: isActive ? "rgba(200, 155, 90, 0.16)" : "transparent",
+                background: isActive ? "var(--activeBg)" : "transparent",
                 color: "var(--text)",
                 fontWeight: 750,
                 fontSize: 14,
@@ -125,8 +127,6 @@ export default function Header() {
               {item.label}
             </NavLink>
           ))}
-
-        
         </nav>
 
         {/* Mobile hamburger (hidden on desktop) */}
@@ -144,7 +144,7 @@ export default function Header() {
             height: 42,
             borderRadius: 9999,
             border: "1px solid var(--border)",
-            background: "rgba(18, 24, 36, 0.35)",
+            background: "var(--surface2)",
             color: "var(--text)",
             fontWeight: 900,
             flex: "0 0 auto",
@@ -161,8 +161,9 @@ export default function Header() {
           style={{
             padding: "10px 12px 14px",
             borderTop: "1px solid var(--border)",
-            background: "rgba(11, 15, 20, 0.88)",
-            backdropFilter: "blur(10px)",
+            background: "var(--surface)", // ✅ matches header
+            backdropFilter: "none",
+            WebkitBackdropFilter: "none",
           }}
         >
           <div
@@ -182,9 +183,9 @@ export default function Header() {
                   padding: "12px 14px",
                   borderRadius: 16,
                   border: `1px solid ${
-                    isActive ? "rgba(226, 185, 121, 0.55)" : "var(--border)"
+                    isActive ? "var(--activeBorder)" : "var(--border)"
                   }`,
-                  background: isActive ? "rgba(200, 155, 90, 0.16)" : "rgba(18, 24, 36, 0.25)",
+                  background: isActive ? "var(--activeBg)" : "var(--surface2)",
                   color: "var(--text)",
                   fontWeight: 800,
                   fontSize: 14,
@@ -195,8 +196,6 @@ export default function Header() {
                 {item.label}
               </NavLink>
             ))}
-
-
           </div>
         </div>
       )}

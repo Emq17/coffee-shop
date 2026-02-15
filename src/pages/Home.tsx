@@ -98,6 +98,20 @@ export default function Home() {
               Orlando, FL
             </span>
           </div>
+              
+        <div
+          className="handwrite"
+          style={{
+            marginTop: 14,
+            fontWeight: 700,
+            fontSize: 22,
+            opacity: 0.95,
+            transform: "none",
+          }}
+        >
+          Hi — we’re Angel &amp; Paola &amp; we are Pre &amp; Post ☕️
+        </div>
+
 
           <h1
             style={{
@@ -132,6 +146,37 @@ export default function Home() {
               Next Pop-Up
             </a>
           </div>
+          {/* QUICK VALUE (fun + clear) */}
+<div
+  style={{
+    marginTop: 16,
+    display: "grid",
+    gap: 10,
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  }}
+>
+  {[
+    { t: "Taste-first wellness", d: "Ceremonial matcha + espresso + protein… built to hit right." },
+    { t: "Pop-ups", d: "We rotate locations. Check the Pop-Ups page for the next stop." },
+    { t: "Fast ordering", d: "Pull up, order, tap to pay. In and out." },
+  ].map((x) => (
+    <div
+      key={x.t}
+      style={{
+        border: "1px solid var(--border)",
+        borderRadius: 14,
+        padding: 14,
+        background: "rgba(255,255,255,0.02)",
+      }}
+    >
+      <div style={{ fontWeight: 900 }}>{x.t}</div>
+      <div className="muted" style={{ marginTop: 6, lineHeight: 1.6 }}>
+        {x.d}
+      </div>
+    </div>
+  ))}
+</div>
+
         </section>
 
         {/* MARQUEE */}
@@ -193,14 +238,13 @@ export default function Home() {
 
                 <div className="muted" style={{ marginTop: 8, lineHeight: 1.75 }}>
                   <div>
-                    <b>Date:</b> 2/11/2026
+                    <b>Date:</b> 2/28/2026
                   </div>
                   <div>
                     <b>Hours:</b> 9:00am – 1:00pm EST
                   </div>
                   <div>
-                    <b>Location:</b> Crunch Fitness Lake Nona — 11926 Narcoossee Rd, Suite 100,
-                    Orlando, FL 32832
+                    <b>Location:</b> Crunch Fitness Kissimmee — 850 Osceola Pkwy, Kissimee, FL 34741
                   </div>
                 </div>
 
@@ -242,7 +286,7 @@ export default function Home() {
               width: 100%;
               border-radius: 14px;
               border: 1px solid var(--border);
-              background: rgba(18, 24, 36, 0.35);
+              rgba(20, 20, 20, 0.90)
               padding: 10px;
             }
 
@@ -445,8 +489,7 @@ function DrinkInfoModal({
             height: 220,
             borderRadius: 14,
             border: "1px solid var(--border)",
-            background:
-              "radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(255,255,255,0.03))",
+            background: "rgba(255,255,255,0.03)",
             display: "grid",
             placeItems: "center",
             opacity: 0.85,
