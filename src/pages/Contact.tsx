@@ -111,22 +111,12 @@ export default function Contact() {
                 birthdays, and community events.
               </p>
 
-              <div className="eventsChips">
-                <span className="eventsChip">On-site setup</span>
-                <span className="eventsChip">Custom menu options</span>
-                <span className="eventsChip">Fast service flow</span>
-                <span className="eventsChip">Central Florida</span>
-              </div>
-
               <div className="eventsActions">
                 <a
                   className="btn btnPrimary"
                   href="mailto:hello@preandpostcoffee.com?subject=Book%20an%20Event%20-%20Pre%20%26%20Post%20Coffee"
                 >
                   Book Us for an Event
-                </a>
-                <a className="btn" href="/home#next-pop-up">
-                  See Next Pop-Up
                 </a>
               </div>
             </div>
@@ -141,7 +131,7 @@ export default function Contact() {
 
               <div className="eventsProof">
                 <div className="eventsProofLine">Popular for gym events and wellness communities</div>
-                <div className="eventsProofLine">Ideal for teams that want quality without complexity</div>
+                <div className="eventsProofLine">Convenient setup, smooth service, and zero stress for your team</div>
               </div>
             </aside>
           </div>
@@ -279,7 +269,7 @@ export default function Contact() {
 
             .eventsGrid {
               display: grid;
-              gap: 18px;
+              gap: 22px;
               grid-template-columns: 1fr;
               align-items: center;
             }
@@ -287,23 +277,21 @@ export default function Contact() {
             .eventsBadge {
               display: inline-block;
               margin-bottom: 12px;
-              padding: 6px 12px;
-              border-radius: 999px;
-              border: 1px solid rgba(217, 188, 132, 0.46);
+              padding: 0;
               color: #f3d7a9;
               font-size: 12px;
               letter-spacing: 1px;
               text-transform: uppercase;
-              font-weight: 800;
-              background: rgba(255, 255, 255, 0.03);
+              font-weight: 700;
             }
 
             .eventsTitle {
               margin: 0;
-              font-size: clamp(32px, 5vw, 58px);
-              line-height: 1.03;
+              font-size: clamp(30px, 4.6vw, 52px);
+              line-height: 1.12;
               letter-spacing: -0.8px;
               max-width: 14ch;
+              font-weight: 700;
             }
 
             .eventsTitle strong {
@@ -311,71 +299,59 @@ export default function Contact() {
             }
 
             .eventsBody {
-              margin: 14px 0 0;
+              margin: 16px 0 0;
               color: rgba(243, 236, 226, 0.84);
-              line-height: 1.7;
+              line-height: 1.85;
               max-width: 58ch;
-              font-size: clamp(16px, 2.2vw, 22px);
-              font-weight: 700;
-            }
-
-            .eventsChips {
-              margin-top: 14px;
-              display: flex;
-              flex-wrap: wrap;
-              gap: 8px;
-            }
-
-            .eventsChip {
-              border: 1px solid rgba(214, 178, 111, 0.34);
-              border-radius: 999px;
-              padding: 7px 12px;
-              font-size: 13px;
-              font-weight: 700;
-              color: rgba(245, 234, 218, 0.92);
-              background: rgba(255, 255, 255, 0.03);
+              font-size: clamp(15px, 1.8vw, 19px);
+              font-weight: 500;
             }
 
             .eventsActions {
-              margin-top: 16px;
+              margin-top: 20px;
               display: flex;
+              align-items: center;
               flex-wrap: wrap;
-              gap: 10px;
+              gap: 12px;
             }
 
             .eventsPanel {
               border: 1px solid rgba(214, 178, 111, 0.3);
               border-radius: 18px;
               background: rgba(255, 255, 255, 0.03);
-              padding: 16px;
+              padding: 18px;
             }
 
             .eventsPanelTitle {
               margin: 0;
               color: #ead3a4;
               text-transform: uppercase;
-              font-size: 30px;
+              font-size: 24px;
               letter-spacing: 0.3px;
-              font-weight: 900;
+              font-weight: 700;
             }
 
             .eventsList {
-              margin: 10px 0 0;
+              margin: 12px 0 0;
               padding-left: 22px;
               color: rgba(255, 255, 255, 0.9);
-              line-height: 1.8;
-              font-size: 20px;
-              font-weight: 700;
+              line-height: 1.78;
+              font-size: 17px;
+              font-weight: 500;
             }
 
             .eventsList li::marker {
               color: #ead3a4;
             }
 
+            .eventsList li + li {
+              margin-top: 4px;
+            }
+
             .eventsProof {
-              margin-top: 14px;
+              margin-top: 16px;
               display: grid;
-              gap: 8px;
+              gap: 10px;
             }
 
             .eventsProofLine {
@@ -384,8 +360,8 @@ export default function Contact() {
               padding: 9px 11px;
               background: rgba(255, 255, 255, 0.02);
               color: rgba(243, 236, 226, 0.84);
-              font-weight: 600;
-              font-size: 18px;
+              font-weight: 500;
+              font-size: 15px;
             }
 
             @media (min-width: 920px) {

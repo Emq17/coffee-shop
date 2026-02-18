@@ -10,8 +10,8 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
 
   // Keep our own float position (iOS Safari can round scrollLeft)
   const posRef = useRef(0);
-
-  const speedRef = useRef(1.8);
+  const lastTsRef = useRef<number | null>(null);
+  const LOOP_DURATION_MS = 60000;
 
   // Touch detection
   const isTouchRef = useRef(false);
@@ -37,7 +37,7 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
   // Desktop: always-on auto-scroll, continuously moving left -> right.
   function startAutoDesktop(opts?: { startFromEnd?: boolean }) {
     stopAuto();
-    speedRef.current = 1.8;
+    lastTsRef.current = null;
 
     const el = rowRef.current;
     if (opts?.startFromEnd && el) {
@@ -51,7 +51,7 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
       posRef.current = el.scrollLeft;
     }
 
-    const tick = () => {
+    const tick = (ts: number) => {
       const el = rowRef.current;
       if (!el) return;
 
@@ -64,7 +64,11 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
 
       // Keep direction fixed and wrap by one track for seamless looping.
       dirRef.current = 1;
-      posRef.current += speedRef.current * dirRef.current;
+      const prevTs = lastTsRef.current ?? ts;
+      const dt = Math.min(48, ts - prevTs);
+      lastTsRef.current = ts;
+      const speedPxPerMs = singleTrack / LOOP_DURATION_MS;
+      posRef.current += speedPxPerMs * dt * dirRef.current;
 
       if (posRef.current >= singleTrack) posRef.current -= singleTrack;
       if (posRef.current < 0) posRef.current += singleTrack;
@@ -82,7 +86,7 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
     // If already running, don’t restart (prevents iOS “resize while scrolling” resets)
     if (rafRef.current != null) return;
 
-    speedRef.current = 1.8;
+    lastTsRef.current = null;
 
     const el = rowRef.current;
 
@@ -104,7 +108,7 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
       posRef.current = el.scrollLeft;
     }
 
-    const tick = () => {
+    const tick = (ts: number) => {
       const el2 = rowRef.current;
       if (!el2) return;
 
@@ -117,7 +121,11 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
       }
 
       dirRef.current = 1;
-      posRef.current += speedRef.current * dirRef.current;
+      const prevTs = lastTsRef.current ?? ts;
+      const dt = Math.min(48, ts - prevTs);
+      lastTsRef.current = ts;
+      const speedPxPerMs = singleTrack / LOOP_DURATION_MS;
+      posRef.current += speedPxPerMs * dt * dirRef.current;
 
       if (posRef.current >= singleTrack) posRef.current -= singleTrack;
       if (posRef.current < 0) posRef.current += singleTrack;
