@@ -106,7 +106,7 @@ export default function Contact() {
 
                 <div className="eventsActions">
                   <a
-                    className="btn btnPrimary"
+                    className="btn eventsBookBtn"
                     href="mailto:hello@preandpostcoffee.com?subject=Book%20an%20Event%20-%20Pre%20%26%20Post%20Coffee"
                   >
                     Book Us for an Event
@@ -326,6 +326,17 @@ export default function Contact() {
               align-items: center;
               flex-wrap: wrap;
               gap: 12px;
+            }
+
+            .eventsBookBtn {
+              color: var(--textOnSurface);
+              background: var(--activeBg);
+              border-color: var(--activeBorder);
+            }
+
+            .eventsBookBtn:hover {
+              background: rgba(200, 155, 90, 0.36);
+              border-color: var(--activeBorder);
             }
 
             @media (max-width: 919px) {
