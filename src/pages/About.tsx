@@ -45,24 +45,94 @@ export default function About() {
                 </span>
               </div>
 
-              <h1 className="aboutTitle">A pop-up cafe built for the before and after.</h1>
+              <h1 className="aboutTitle">A little love story served one cup at a time.</h1>
 
               <p className="muted aboutBody">
-                Pre &amp; Post is for the moments that matter - before work, before training, after
-                training, after a long day. We keep it simple: drinks that taste good and feel clean.
+                Pre &amp; Post started with two people - Angel and his fiancée, Paola - dreaming up a
+                coffee pop-up that felt warm, intentional, and full of heart. What began as shared
+                mornings, recipes, and gym stops turned into a space for the "before" and "after"
+                moments that make up real life.
               </p>
 
               <div className="aboutCtas">
                 <a className="btn btnPrimary" href="/menu">
                   View Menu
                 </a>
-                <Link className="btn" to="/home#next-pop-up">
+                <Link className="btn" to="/home#home-bottom">
                   See Pop-Ups
                 </Link>
                 <a className="btn" href="/contact">
                   Contact
                 </a>
               </div>
+            </div>
+          </div>
+
+          <div className="aboutSectionDivider" />
+
+          <div className="aboutUnifiedTop">
+            <div>
+              <div className="aboutSectionTitle">Our story</div>
+              <p className="muted aboutSectionBody" style={{ marginTop: 10 }}>
+                This brand reflects our own life: early mornings, full schedules, and the joy
+                of sharing something beautiful with our community. Pre &amp; Post is our way of
+                turning ordinary days into something warm and memorable.
+              </p>
+            </div>
+            <Link className="btn aboutUnifiedBtn" to="/home#home-bottom">
+              Next Pop-Up Details
+            </Link>
+          </div>
+
+          <div className="aboutValuesGrid">
+            <article className="card aboutValueCard aboutValueBlock">
+              <div className="aboutValueTitle">Made with love</div>
+              <p className="muted aboutValueBody">
+                If we would not serve it to each other, it does not make the menu.
+              </p>
+            </article>
+
+            <article className="card aboutValueCard aboutValueBlock">
+              <div className="aboutValueTitle">Simple and intentional</div>
+              <p className="muted aboutValueBody">
+                Clean ingredients, thoughtful combinations, and no extra noise.
+              </p>
+            </article>
+
+            <article className="card aboutValueCard aboutValueBlock">
+              <div className="aboutValueTitle">Community first</div>
+              <p className="muted aboutValueBody">
+                We love creating spaces where people connect, recharge, and leave smiling.
+              </p>
+            </article>
+          </div>
+
+          <div className="aboutFollowBar">
+            <div>
+              <div className="aboutSectionTitle" style={{ fontSize: 18 }}>
+                Follow along
+              </div>
+              <p className="muted" style={{ margin: "6px 0 0", lineHeight: 1.7 }}>
+                Pop-up dates, behind-the-scenes moments, and little updates from Angel and Paola.
+              </p>
+            </div>
+            <div className="aboutFollowActions">
+              <a
+                className="btn aboutUnifiedBtn"
+                href="https://instagram.com/preandpostcoffee"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
+              <a
+                className="btn aboutUnifiedBtn"
+                href="https://tiktok.com/@preandpostcoffee"
+                target="_blank"
+                rel="noreferrer"
+              >
+                TikTok
+              </a>
             </div>
           </div>
 
@@ -211,6 +281,85 @@ export default function About() {
               background: rgba(255, 255, 255, 0.03) !important;
             }
 
+            .aboutSectionDivider {
+              margin: 18px 0 16px;
+              border-top: 1px solid rgba(217, 188, 132, 0.2);
+            }
+
+            .aboutUnifiedTop {
+              display: grid;
+              gap: 12px;
+              grid-template-columns: 1fr;
+              align-items: start;
+            }
+
+            .aboutValuesGrid {
+              margin-top: 14px;
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: 12px;
+            }
+
+            .aboutValueBlock {
+              border: 1px solid rgba(217, 188, 132, 0.24);
+              background: rgba(255, 255, 255, 0.035) !important;
+              border-radius: 14px;
+              padding: 14px;
+            }
+
+            .aboutValueTitle {
+              font-weight: 900;
+              letter-spacing: -0.2px;
+            }
+
+            .aboutValueBody {
+              margin: 6px 0 0;
+              line-height: 1.65;
+            }
+
+            .aboutFollowBar {
+              margin-top: 14px;
+              border: 1px solid rgba(217, 188, 132, 0.24);
+              border-radius: 14px;
+              padding: 14px;
+              display: grid;
+              gap: 12px;
+              background: rgba(255, 255, 255, 0.03);
+            }
+
+            .aboutFollowActions {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px;
+            }
+
+            .aboutUnifiedBtn {
+              color: var(--textOnSurface);
+              background: var(--activeBg);
+              border-color: var(--activeBorder);
+            }
+
+            .aboutUnifiedBtn:hover {
+              background: rgba(200, 155, 90, 0.36);
+              border-color: var(--activeBorder);
+            }
+
+            @media (min-width: 900px) {
+              .aboutUnifiedTop {
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: end;
+              }
+
+              .aboutValuesGrid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+              }
+
+              .aboutFollowBar {
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: center;
+              }
+            }
+
             @media (max-width: 520px) {
               .aboutImgWrap {
                 min-height: 0;
@@ -226,75 +375,6 @@ export default function About() {
               }
             }
           `}</style>
-        </section>
-
-        {/* MISSION + VALUES */}
-        <section style={{ marginTop: 18 }}>
-          <div className="card aboutCard" style={{ padding: 18, background: "rgba(32, 26, 24, 0.92)" }}>
-            <div className="aboutSectionTitle">Our mission</div>
-            <p className="muted aboutSectionBody">
-              Make cafe-inspired drinks that feel clean, fun, and repeatable - no weird ingredients,
-              no fake "health" branding. Just real flavor with purpose.
-            </p>
-
-            <div
-              style={{
-                marginTop: 14,
-                display: "grid",
-                gap: 12,
-                gridTemplateColumns: "1fr",
-              }}
-              className="aboutCards"
-            >
-              <div className="card aboutValueCard" style={{ padding: 14, background: "rgba(32, 26, 24, 0.92)" }}>
-                <div style={{ fontWeight: 900 }}>Taste first</div>
-                <div className="muted" style={{ marginTop: 6, lineHeight: 1.6 }}>
-                  If it doesn't taste good, it doesn't make the menu.
-                </div>
-              </div>
-
-              <div className="card aboutValueCard" style={{ padding: 14, background: "rgba(32, 26, 24, 0.92)" }}>
-                <div style={{ fontWeight: 900 }}>Ingredients that make sense</div>
-                <div className="muted" style={{ marginTop: 6, lineHeight: 1.6 }}>
-                  Simple builds, clean options, no gimmicks.
-                </div>
-              </div>
-
-              <div className="card aboutValueCard" style={{ padding: 14, background: "rgba(32, 26, 24, 0.92)" }}>
-                <div style={{ fontWeight: 900 }}>Pop-up energy</div>
-                <div className="muted" style={{ marginTop: 6, lineHeight: 1.6 }}>
-                  Community-first. Show up, hang out, leave better.
-                </div>
-              </div>
-            </div>
-
-            <style>{`
-              @media (min-width: 900px) {
-                .aboutCards {
-                  grid-template-columns: repeat(3, 1fr) !important;
-                }
-              }
-            `}</style>
-          </div>
-        </section>
-
-        {/* FOLLOW ALONG */}
-        <section style={{ marginTop: 18 }}>
-          <div className="card aboutCard" style={{ padding: 18, background: "rgba(32, 26, 24, 0.92)" }}>
-            <div className="aboutSectionTitle">Follow along</div>
-            <p className="muted aboutSectionBody" style={{ maxWidth: "unset" }}>
-              Pop-up announcements, behind-the-scenes, and new drops.
-            </p>
-
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-              <a className="btn" href="https://instagram.com/preandpostcoffee" target="_blank" rel="noreferrer">
-                Instagram
-              </a>
-              <a className="btn" href="https://tiktok.com/@preandpostcoffee" target="_blank" rel="noreferrer">
-                TikTok
-              </a>
-            </div>
-          </div>
         </section>
       </div>
     </main>

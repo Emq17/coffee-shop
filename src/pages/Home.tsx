@@ -334,6 +334,7 @@ export default function Home() {
             }
           `}</style>
         </section>
+        <div id="home-bottom" style={{ height: 1 }} />
       </div>
     </main>
   );

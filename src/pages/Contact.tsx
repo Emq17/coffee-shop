@@ -85,7 +85,7 @@ export default function Contact() {
                 >
                   Message on TikTok
                 </a>
-                <Link className="btn eventsBookBtn" to="/home#next-pop-up">
+                <Link className="btn eventsBookBtn" to="/home#home-bottom">
                   Next Pop-Up Details
                 </Link>
               </div>
