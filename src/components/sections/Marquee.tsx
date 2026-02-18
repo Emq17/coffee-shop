@@ -27,11 +27,17 @@ export default function Marquee({
           display:inline-block;
           padding: 14px 0;
           font-weight: 900;
+          font-size: 18px;
           letter-spacing: -0.2px;
           opacity: 1;
           color: #000;
           white-space: nowrap;
           animation: marquee 60s linear infinite;
+        }
+        @media (max-width: 768px){
+          .marqueeTrack{
+            font-size: 15px;
+          }
         }
         @keyframes marquee{
           from{ transform: translateX(-50%); }

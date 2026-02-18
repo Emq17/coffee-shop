@@ -106,28 +106,6 @@ export default function Home() {
                 <a className="btn" href="/about">
                   About
                 </a>
-
-                <a
-                  className="btn"
-                  href="https://www.instagram.com/preandpostcoffee/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Instagram
-                </a>
-
-                <a
-                  className="btn"
-                  href="https://www.tiktok.com/@preandpostcoffee?_r=1&_t=ZT-92kOsWdobfh&fbclid=PAdGRleAP4cAtleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacEGoL718xX-OSk5r9t_Nea1SOKyBUqGntdd-Zj1zTEJDl3uUF3Cf2HyrqEag_aem_bTe893o6jPSVTghXOeqkNA"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  TikTok
-                </a>
-
-                <a className="btn" href="/contact">
-                  Contact
-                </a>
               </div>
             </div>
           </section>
