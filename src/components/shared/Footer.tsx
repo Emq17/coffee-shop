@@ -55,21 +55,23 @@ export default function Footer() {
           }
 
           .footerTop {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            gap: 7px;
           }
 
           .footerNav {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            justify-content: flex-start;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             font-weight: 700;
             font-size: 10px;
+            width: 100%;
+            max-width: 260px;
           }
 
           .footerNav a {
@@ -84,14 +86,7 @@ export default function Footer() {
           }
 
           .footerCenter {
-            grid-column: 1 / -1;
             text-align: center;
-          }
-
-          .footerNavRight {
-            justify-content: flex-start;
-            align-items: flex-end;
-            text-align: right;
           }
 
           .footerWordmark {
@@ -128,15 +123,35 @@ export default function Footer() {
             text-align: center;
           }
 
+          @media (max-width: 899px) {
+            .footerCenter {
+              order: 1;
+            }
+
+            .footerNav:not(.footerNavRight) {
+              order: 2;
+            }
+
+            .footerNavRight {
+              order: 3;
+            }
+          }
+
           @media (min-width: 900px) {
             .footerTop {
+              display: grid;
               grid-template-columns: 1fr auto 1fr;
+              gap: 6px;
+              align-items: center;
             }
 
             .footerNav {
               flex-direction: row;
+              order: 0;
               justify-content: flex-start;
               align-items: center;
+              width: auto;
+              max-width: none;
             }
 
             .footerNavRight {

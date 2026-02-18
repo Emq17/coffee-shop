@@ -291,7 +291,6 @@ export default function Menu() {
           text-align: center;
           background: rgba(255, 255, 255, 0.03);
           min-width: 164px;
-          margin-inline: auto;
         }
 
         .instaIcon {
@@ -378,6 +377,10 @@ export default function Menu() {
 
           .pledgeText {
             text-align: center;
+          }
+
+          .instaCard {
+            align-self: flex-end;
           }
         }
       `}</style>
