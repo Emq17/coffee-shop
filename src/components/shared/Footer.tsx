@@ -31,8 +31,8 @@ export default function Footer() {
               <a className="btn" href="https://www.instagram.com/preandpostcoffee/" target="_blank" rel="noreferrer">
                 Instagram
               </a>
-              <a className="btn" href="/pop-ups">
-                Pop-Ups
+              <a className="btn" href="/home#next-pop-up">
+                Next Pop-Up
               </a>
             </div>
           </div>

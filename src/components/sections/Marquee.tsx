@@ -9,7 +9,6 @@ export default function Marquee({
         style={{
           borderTop: "1px solid var(--border)",
           borderBottom: "1px solid var(--border)",
-          background: "rgba(20, 20, 20, 0.90)",
           overflow: "hidden",
         }}
       >
@@ -29,13 +28,14 @@ export default function Marquee({
           padding: 14px 0;
           font-weight: 900;
           letter-spacing: -0.2px;
-          opacity: .9;
+          opacity: 1;
+          color: #000;
           white-space: nowrap;
           animation: marquee 60s linear infinite;
         }
         @keyframes marquee{
-          from{ transform: translateX(0); }
-          to{ transform: translateX(-50%); }
+          from{ transform: translateX(-50%); }
+          to{ transform: translateX(0); }
         }
         @media (prefers-reduced-motion: reduce){
           .marqueeTrack{ animation: none; }

@@ -1,25 +1,26 @@
 :root {
-  /* ===== COFFEE BLACK / CHARCOAL BASE ===== */
-  --bg: #0b0b0b;          /* page background */
-  --surface: #141414;     /* header + large containers */
-  --surface2: #1a1a1a;    /* cards, chips, inner panels */
-  --surface3: #202020;    /* hover surface (subtle, still flat) */
+  /* ===== BLUE/SAGE BASE ===== */
+  --bg: #91ae9d;          /* overall page background (microscopically darker) */
+  --surface: #141211;     /* header surface (near-black espresso) */
+  --surface2: #4b372b;    /* card surface (medium brown) */
+  --surface3: #2d231f;    /* deep espresso */
 
   /* ===== TEXT ===== */
-  --text: #f3f4f6;
-  --muted: rgba(243, 244, 246, 0.72);
+  --text: #182320;        /* default text on page bg */
+  --muted: rgba(24, 35, 32, 0.74);
+  --textOnSurface: #f3ece2;
+  --mutedOnSurface: rgba(243, 236, 226, 0.78);
 
   /* ===== GOLD ACCENTS ===== */
   --gold: #c89b5a;        /* primary gold */
   --gold2: #e2b979;       /* brighter gold for hover/active */
-  --border: rgba(200, 155, 90, 0.28);
+  --border: rgba(169, 128, 74, 0.45);
 
   /* ===== NAV ACTIVE / HIGHLIGHTS (no random blues) ===== */
-  --activeBorder: rgba(226, 185, 121, 0.55);
-  --activeBg: rgba(200, 155, 90, 0.16);
+  --activeBorder: rgba(226, 185, 121, 0.7);
+  --activeBg: rgba(200, 155, 90, 0.28);
 
-  /* ===== OPTIONAL: subtle shadow (still not “patchy”) ===== */
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow: 0 12px 28px rgba(35, 23, 14, 0.34);
 }
 
 * { box-sizing: border-box; }
@@ -47,6 +48,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: var(--shadow);
+  color: var(--textOnSurface);
 }
 
 /* ✅ Buttons */
@@ -59,7 +61,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 9999px;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--text);
+  color: inherit;
   font-weight: 600;
   cursor: pointer;
   transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
@@ -68,18 +70,19 @@ a { color: inherit; text-decoration: none; }
 .btn:hover {
   transform: translateY(-1px);
   border-color: var(--activeBorder);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(55, 35, 22, 0.12);
 }
 
 .btnPrimary {
-  background: rgba(200, 155, 90, 0.18); /* ✅ flat */
+  background: rgba(200, 155, 90, 0.28);
 }
 
 .btnPrimary:hover {
-  background: rgba(200, 155, 90, 0.24);
+  background: rgba(200, 155, 90, 0.36);
 }
 
 .muted { color: var(--muted); }
+.card .muted { color: var(--mutedOnSurface); }
 
 /* Handwriting */
 .handwrite {
