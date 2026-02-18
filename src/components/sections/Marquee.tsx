@@ -36,7 +36,7 @@ export default function Marquee({
         }
         @media (max-width: 768px){
           .marqueeTrack{
-            font-size: 15px;
+            font-size: 14px;
           }
         }
         @keyframes marquee{

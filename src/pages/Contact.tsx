@@ -315,6 +315,12 @@ export default function Contact() {
               gap: 12px;
             }
 
+            @media (max-width: 919px) {
+              .eventsActions {
+                justify-content: center;
+              }
+            }
+
             .eventsPanel {
               border: 1px solid rgba(214, 178, 111, 0.3);
               border-radius: 18px;

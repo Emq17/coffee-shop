@@ -148,11 +148,8 @@ export default function Home() {
                 </div>
 
                 <div className="homePopActions">
-                  <a className="btn btnPrimary" href="/home#next-pop-up">
-                    Event Details
-                  </a>
                   <a
-                    className="btn"
+                    className="btn homePopMapBtn"
                     href="https://www.google.com/maps/search/?api=1&query=Crunch+Fitness+Kissimmee+850+Osceola+Pkwy+Kissimmee+FL+34741"
                     target="_blank"
                     rel="noreferrer"
@@ -286,6 +283,23 @@ export default function Home() {
               display: flex;
               gap: 10px;
               flex-wrap: wrap;
+            }
+
+            .homePopMapBtn{
+              color: var(--textOnSurface);
+              background: var(--activeBg);
+              border-color: var(--activeBorder);
+            }
+
+            .homePopMapBtn:hover{
+              background: rgba(200, 155, 90, 0.36);
+              border-color: var(--activeBorder);
+            }
+
+            .homePopMapBtn:active,
+            .homePopMapBtn:focus-visible{
+              background: var(--activeBg);
+              border-color: var(--activeBorder);
             }
 
             .homePopPosterShell{
