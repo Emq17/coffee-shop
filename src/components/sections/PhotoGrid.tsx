@@ -11,7 +11,8 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
   // Keep our own float position (iOS Safari can round scrollLeft)
   const posRef = useRef(0);
   const lastTsRef = useRef<number | null>(null);
-  const LOOP_DURATION_MS = 60000;
+  const DESKTOP_LOOP_DURATION_MS = 60000;
+  const MOBILE_LOOP_DURATION_MS = 42000;
 
   // Touch detection
   const isTouchRef = useRef(false);
@@ -67,7 +68,7 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
       const prevTs = lastTsRef.current ?? ts;
       const dt = Math.min(48, ts - prevTs);
       lastTsRef.current = ts;
-      const speedPxPerMs = singleTrack / LOOP_DURATION_MS;
+      const speedPxPerMs = singleTrack / DESKTOP_LOOP_DURATION_MS;
       posRef.current += speedPxPerMs * dt * dirRef.current;
 
       if (posRef.current >= singleTrack) posRef.current -= singleTrack;
@@ -124,7 +125,7 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
       const prevTs = lastTsRef.current ?? ts;
       const dt = Math.min(48, ts - prevTs);
       lastTsRef.current = ts;
-      const speedPxPerMs = singleTrack / LOOP_DURATION_MS;
+      const speedPxPerMs = singleTrack / MOBILE_LOOP_DURATION_MS;
       posRef.current += speedPxPerMs * dt * dirRef.current;
 
       if (posRef.current >= singleTrack) posRef.current -= singleTrack;
