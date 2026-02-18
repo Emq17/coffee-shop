@@ -89,51 +89,45 @@ export default function Contact() {
               </div>
             </div>
           </div>
-        </section>
+          <div className="contactDivider" role="presentation" />
 
-        <section
-          className="card contactEventsCard"
-          style={{
-            marginTop: 16,
-            padding: 22,
-            background: "rgba(32, 26, 24, 0.92)",
-          }}
-        >
-          <div className="eventsGrid">
-            <div>
-              <span className="eventsBadge">For Events</span>
-              <h2 className="eventsTitle">
-                Turn your next event into a <strong>coffee bar experience.</strong>
-              </h2>
-              <p className="eventsBody">
-                We bring a premium pop-up setup with espresso, ceremonial matcha, and wellness
-                drinks that guests actually remember. Great for gyms, offices, brand activations,
-                birthdays, and community events.
-              </p>
+          <div className="eventsWrap">
+            <div className="eventsGrid">
+              <div>
+                <span className="eventsBadge">For Events</span>
+                <h2 className="eventsTitle">
+                  Turn your next event into a <strong>coffee bar experience.</strong>
+                </h2>
+                <p className="eventsBody">
+                  We bring a premium pop-up setup with espresso, ceremonial matcha, and wellness
+                  drinks that guests actually remember. Great for gyms, offices, brand activations,
+                  birthdays, and community events.
+                </p>
 
-              <div className="eventsActions">
-                <a
-                  className="btn btnPrimary"
-                  href="mailto:hello@preandpostcoffee.com?subject=Book%20an%20Event%20-%20Pre%20%26%20Post%20Coffee"
-                >
-                  Book Us for an Event
-                </a>
+                <div className="eventsActions">
+                  <a
+                    className="btn btnPrimary"
+                    href="mailto:hello@preandpostcoffee.com?subject=Book%20an%20Event%20-%20Pre%20%26%20Post%20Coffee"
+                  >
+                    Book Us for an Event
+                  </a>
+                </div>
               </div>
+
+              <aside className="eventsPanel">
+                <h3 className="eventsPanelTitle">What You Get</h3>
+                <ul className="eventsList">
+                  <li>Signature drinks and wellness specialties</li>
+                  <li>Friendly team with polished service</li>
+                  <li>Flexible event formats and timing</li>
+                </ul>
+
+                <div className="eventsProof">
+                  <div className="eventsProofLine">Popular for gym events and wellness communities</div>
+                  <div className="eventsProofLine">Convenient setup, smooth service, and zero stress for your team</div>
+                </div>
+              </aside>
             </div>
-
-            <aside className="eventsPanel">
-              <h3 className="eventsPanelTitle">What You Get</h3>
-              <ul className="eventsList">
-                <li>Signature drinks and wellness specialties</li>
-                <li>Friendly team with polished service</li>
-                <li>Flexible event formats and timing</li>
-              </ul>
-
-              <div className="eventsProof">
-                <div className="eventsProofLine">Popular for gym events and wellness communities</div>
-                <div className="eventsProofLine">Convenient setup, smooth service, and zero stress for your team</div>
-              </div>
-            </aside>
           </div>
 
           <style>{`
@@ -263,14 +257,26 @@ export default function Contact() {
               line-height: 1.5;
             }
 
-            .contactEventsCard {
-              border: 1px solid rgba(217, 188, 132, 0.3);
-              box-shadow:
-                0 20px 32px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            .contactDivider {
+              margin: 18px 0;
+              height: 1px;
+              border: 0;
+              background: linear-gradient(
+                to right,
+                transparent,
+                rgba(217, 188, 132, 0.34) 14%,
+                rgba(217, 188, 132, 0.34) 86%,
+                transparent
+              );
+            }
+
+            .eventsWrap {
+              border: 1px solid rgba(217, 188, 132, 0.24);
+              border-radius: 16px;
+              padding: 16px;
               background:
                 linear-gradient(90deg, rgba(32, 26, 24, 0.95), rgba(49, 45, 39, 0.9), rgba(32, 26, 24, 0.95)),
-                rgba(32, 26, 24, 0.92) !important;
+                rgba(32, 26, 24, 0.92);
             }
 
             .eventsGrid {
@@ -293,11 +299,12 @@ export default function Contact() {
 
             .eventsTitle {
               margin: 0;
-              font-size: clamp(30px, 4.6vw, 52px);
-              line-height: 1.12;
-              letter-spacing: -0.8px;
-              max-width: 14ch;
-              font-weight: 700;
+              font-size: clamp(30px, 4.4vw, 44px);
+              line-height: 1.08;
+              letter-spacing: -0.4px;
+              max-width: 16ch;
+              font-weight: 650;
+              font-family: inherit;
             }
 
             .eventsTitle strong {
