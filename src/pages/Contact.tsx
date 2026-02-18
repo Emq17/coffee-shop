@@ -331,6 +331,36 @@ export default function Contact() {
               .eventsActions {
                 justify-content: center;
               }
+
+              .contactTop,
+              .contactInfoCard,
+              .contactActionCard,
+              .eventsWrap,
+              .eventsPanel {
+                text-align: center;
+              }
+
+              .contactLead,
+              .eventsBody {
+                margin-inline: auto;
+              }
+
+              .contactActions {
+                align-items: center;
+              }
+
+              .eventsBadge {
+                display: inline-block;
+              }
+
+              .eventsTitle {
+                margin-inline: auto;
+              }
+
+              .eventsList {
+                padding-left: 0;
+                list-style-position: inside;
+              }
             }
 
             .eventsPanel {

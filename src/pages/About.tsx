@@ -368,10 +368,38 @@ export default function About() {
 
               .aboutSign {
                 margin-bottom: 12px;
+                align-self: center;
               }
 
               .aboutTitle {
                 font-size: 40px;
+              }
+
+              .aboutTextWrap,
+              .aboutSectionBody,
+              .aboutValueBody,
+              .aboutSectionTitle,
+              .aboutValueTitle {
+                text-align: center;
+              }
+
+              .aboutMetaRow,
+              .aboutCtas,
+              .aboutFollowActions,
+              .aboutCaption {
+                justify-content: center;
+              }
+
+              .aboutBody {
+                text-align: center;
+              }
+
+              .aboutUnifiedTop {
+                justify-items: center;
+              }
+
+              .aboutFollowBar {
+                text-align: center;
               }
             }
           `}</style>

@@ -56,16 +56,16 @@ export default function Footer() {
 
           .footerTop {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 6px;
             align-items: center;
           }
 
           .footerNav {
             display: flex;
+            flex-direction: column;
             gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             font-weight: 700;
@@ -84,7 +84,14 @@ export default function Footer() {
           }
 
           .footerCenter {
+            grid-column: 1 / -1;
             text-align: center;
+          }
+
+          .footerNavRight {
+            justify-content: flex-start;
+            align-items: flex-end;
+            text-align: right;
           }
 
           .footerWordmark {
@@ -127,11 +134,19 @@ export default function Footer() {
             }
 
             .footerNav {
+              flex-direction: row;
               justify-content: flex-start;
+              align-items: center;
             }
 
             .footerNavRight {
               justify-content: flex-end;
+              align-items: center;
+              text-align: left;
+            }
+
+            .footerCenter {
+              grid-column: auto;
             }
           }
         `}</style>

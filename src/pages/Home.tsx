@@ -143,6 +143,16 @@ export default function Home() {
               background: rgba(200, 155, 90, 0.36);
               border-color: var(--activeBorder);
             }
+
+            @media (max-width: 600px) {
+              .aboutPreviewBody {
+                font-size: 12px;
+                line-height: 1.2;
+                letter-spacing: 0;
+                font-style: normal;
+                white-space: nowrap;
+              }
+            }
           `}</style>
           <div
             style={{
@@ -414,10 +424,10 @@ export default function Home() {
                   className="eventVideo"
                   controls
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   style={{ borderRadius: 12, display: "block" }}
                 >
-                  <source src="/videos/event-2.mp4" type="video/mp4" />
+                  <source src="/videos/event-2.mp4#t=0.1" type="video/mp4" />
                 </video>
               </div>
 
@@ -426,10 +436,10 @@ export default function Home() {
                   className="eventVideo"
                   controls
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   style={{ borderRadius: 12, display: "block" }}
                 >
-                  <source src="/videos/event-1.mp4" type="video/mp4" />
+                  <source src="/videos/event-1.mp4#t=0.1" type="video/mp4" />
                 </video>
               </div>
             </div>
