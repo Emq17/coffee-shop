@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function About() {
   return (
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
@@ -54,9 +56,9 @@ export default function About() {
                 <a className="btn btnPrimary" href="/menu">
                   View Menu
                 </a>
-                <a className="btn" href="/home#next-pop-up">
+                <Link className="btn" to="/home#next-pop-up">
                   See Pop-Ups
-                </a>
+                </Link>
                 <a className="btn" href="/contact">
                   Contact
                 </a>

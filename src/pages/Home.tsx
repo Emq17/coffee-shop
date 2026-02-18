@@ -334,7 +334,6 @@ export default function Home() {
             }
           `}</style>
         </section>
-
       </div>
     </main>
   );

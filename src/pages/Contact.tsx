@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Contact() {
   return (
     <main style={{ paddingTop: 96, paddingBottom: 72 }}>
@@ -68,7 +70,7 @@ export default function Contact() {
               </p>
               <div className="contactActions">
                 <a
-                  className="btn"
+                  className="btn eventsBookBtn"
                   href="https://www.instagram.com/preandpostcoffee/"
                   target="_blank"
                   rel="noreferrer"
@@ -76,16 +78,16 @@ export default function Contact() {
                   Message on IG
                 </a>
                 <a
-                  className="btn"
+                  className="btn eventsBookBtn"
                   href="https://www.tiktok.com/@preandpostcoffee"
                   target="_blank"
                   rel="noreferrer"
                 >
                   Message on TikTok
                 </a>
-                <a className="btn" href="/home#next-pop-up">
+                <Link className="btn eventsBookBtn" to="/home#next-pop-up">
                   Next Pop-Up Details
-                </a>
+                </Link>
               </div>
             </div>
           </div>
