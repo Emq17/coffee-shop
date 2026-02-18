@@ -194,6 +194,12 @@ export default function Contact() {
               background: rgba(255, 255, 255, 0.04);
             }
 
+            @media (max-width: 919px) {
+              .contactReplyPill {
+                margin: 0 auto;
+              }
+            }
+
             .contactGrid {
               display: grid;
               grid-template-columns: 1fr;
