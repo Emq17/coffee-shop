@@ -6,14 +6,12 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
   const rowRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const dirRef = useRef<1 | -1>(1);
+  const loopPhotos = photos.length > 1 ? [...photos, ...photos] : photos;
 
   // Keep our own float position (iOS Safari can round scrollLeft)
   const posRef = useRef(0);
 
-  // Desktop hover speed tuning
-  const baseSpeedRef = useRef(2.2);
-  const maxBoostRef = useRef(2.8);
-  const speedRef = useRef(baseSpeedRef.current);
+  const speedRef = useRef(1.8);
 
   // Touch detection
   const isTouchRef = useRef(false);
@@ -30,38 +28,48 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
     rafRef.current = null;
   }
 
-  // Desktop: hover auto-scroll, stops at edges (no looping)
-  function startAutoDesktop() {
+  function getLoopMetrics(el: HTMLDivElement) {
+    const max = el.scrollWidth - el.clientWidth;
+    const singleTrack = el.scrollWidth / 2;
+    return { max, singleTrack };
+  }
+
+  // Desktop: always-on auto-scroll, continuously moving left -> right.
+  function startAutoDesktop(opts?: { startFromEnd?: boolean }) {
     stopAuto();
+    speedRef.current = 1.8;
+
+    const el = rowRef.current;
+    if (opts?.startFromEnd && el) {
+      const { max } = getLoopMetrics(el);
+      if (max > 0) {
+        el.scrollLeft = max;
+        posRef.current = max;
+        dirRef.current = 1;
+      }
+    } else if (el) {
+      posRef.current = el.scrollLeft;
+    }
 
     const tick = () => {
       const el = rowRef.current;
       if (!el) return;
 
-      const max = el.scrollWidth - el.clientWidth;
+      const { max, singleTrack } = getLoopMetrics(el);
 
-      if (max <= 0) {
+      if (max <= 0 || singleTrack <= 0) {
         rafRef.current = requestAnimationFrame(tick);
         return;
       }
 
-      const next = el.scrollLeft + speedRef.current * dirRef.current;
+      // Keep direction fixed and wrap by one track for seamless looping.
+      dirRef.current = 1;
+      posRef.current += speedRef.current * dirRef.current;
 
-      if (dirRef.current === 1) {
-        if (el.scrollLeft >= max - 1) {
-          el.scrollLeft = max;
-          stopAuto();
-          return;
-        }
-        el.scrollLeft = Math.min(max, next);
-      } else {
-        if (el.scrollLeft <= 0) {
-          el.scrollLeft = 0;
-          stopAuto();
-          return;
-        }
-        el.scrollLeft = Math.max(0, next);
-      }
+      if (posRef.current >= singleTrack) posRef.current -= singleTrack;
+      if (posRef.current < 0) posRef.current += singleTrack;
+
+      el.scrollLeft = posRef.current;
 
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -69,22 +77,18 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
     rafRef.current = requestAnimationFrame(tick);
   }
 
-  /**
-   * Mobile: always-on auto-scroll, bounces at edges.
-   * NEW: if startFromEnd is true, it jumps to the last image and starts moving right->left.
-   */
+  // Mobile: always-on auto-scroll with the same seamless loop behavior.
   function startAutoMobile(opts?: { startFromEnd?: boolean }) {
     // If already running, don’t restart (prevents iOS “resize while scrolling” resets)
     if (rafRef.current != null) return;
 
-    // tune mobile speed here (>= 1px is safest for iOS)
-    speedRef.current = 1.25;
+    speedRef.current = 1.8;
 
     const el = rowRef.current;
 
     // If we want to start from the end, we may need to wait until it’s scrollable
     if (opts?.startFromEnd && el) {
-      const max = el.scrollWidth - el.clientWidth;
+      const { max } = getLoopMetrics(el);
 
       if (max <= 0) {
         // keep alive until scrollable (images/layout ready)
@@ -92,10 +96,10 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
         return;
       }
 
-      // jump to end and start moving right -> left
+      // jump to end and start moving left -> right
       el.scrollLeft = max;
       posRef.current = max;
-      dirRef.current = -1;
+      dirRef.current = 1;
     } else if (el) {
       posRef.current = el.scrollLeft;
     }
@@ -104,47 +108,26 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
       const el2 = rowRef.current;
       if (!el2) return;
 
-      const max = el2.scrollWidth - el2.clientWidth;
+      const { max, singleTrack } = getLoopMetrics(el2);
 
       // keep alive until scrollable (images/layout ready)
-      if (max <= 0) {
+      if (max <= 0 || singleTrack <= 0) {
         rafRef.current = requestAnimationFrame(tick);
         return;
       }
 
+      dirRef.current = 1;
       posRef.current += speedRef.current * dirRef.current;
 
-      // bounce
-      if (posRef.current >= max) {
-        posRef.current = max;
-        dirRef.current = -1;
-      } else if (posRef.current <= 0) {
-        posRef.current = 0;
-        dirRef.current = 1;
-      }
+      if (posRef.current >= singleTrack) posRef.current -= singleTrack;
+      if (posRef.current < 0) posRef.current += singleTrack;
 
-      el2.scrollLeft = Math.round(posRef.current);
+      el2.scrollLeft = posRef.current;
 
       rafRef.current = requestAnimationFrame(tick);
     };
 
     rafRef.current = requestAnimationFrame(tick);
-  }
-
-  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (isTouchRef.current) return;
-
-    const el = rowRef.current;
-    if (!el) return;
-
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const pct = x / rect.width;
-
-    dirRef.current = pct < 0.5 ? -1 : 1;
-
-    const edgeStrength = Math.min(1, Math.abs(pct - 0.5) / 0.5);
-    speedRef.current = baseSpeedRef.current + maxBoostRef.current * edgeStrength;
   }
 
   // --- Touch handlers: pause/resume ONLY for horizontal swipes on the row ---
@@ -231,9 +214,12 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
 
       // Mobile: start immediately if not already running
       if (isTouchRef.current) {
-        if (rafRef.current == null) startAutoMobile({ startFromEnd: true }); // ✅ start from last + move right->left
+        if (rafRef.current == null) startAutoMobile(); // seamless left->right
       }
-      // Desktop: starts on hover only
+      // Desktop: start immediately with the same left->right behavior.
+      else {
+        if (rafRef.current == null) startAutoDesktop();
+      }
     };
 
     setModeAndMaybeStart();
@@ -255,22 +241,14 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
         ref={rowRef}
         className="ppRow"
         aria-label="Photo gallery"
-        // Desktop hover behavior
-        onMouseEnter={() => {
-          if (!isTouchRef.current) startAutoDesktop();
-        }}
-        onMouseMove={onMouseMove}
-        onMouseLeave={() => {
-          if (!isTouchRef.current) stopAuto();
-        }}
         // Mobile: only react to horizontal swipes on the row
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
         onTouchCancel={onTouchEnd}
       >
-        {photos.map((p) => (
-          <div key={p.src} className="ppCard">
+        {loopPhotos.map((p, i) => (
+          <div key={`${p.src}-${i}`} className="ppCard">
             <img src={p.src} alt={p.alt} className="ppImg" loading="lazy" />
           </div>
         ))}

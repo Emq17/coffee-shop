@@ -6,7 +6,6 @@ export default function Header() {
     { label: "Home", to: "/home" },
     { label: "Menu", to: "/menu" },
     { label: "About", to: "/about" },
-    { label: "Pop-Ups", to: "/pop-ups" },
     { label: "Contact Us", to: "/contact" },
   ];
 
@@ -26,8 +25,9 @@ export default function Header() {
         left: 0,
         width: "100%",
         zIndex: 50,
-        background: "var(--surface)", // ✅ flat charcoal
+        background: "var(--surface)",
         borderBottom: "1px solid var(--border)",
+        color: "#ffffff",
         backdropFilter: "none",
         WebkitBackdropFilter: "none",
       }}
@@ -84,6 +84,7 @@ export default function Header() {
               className="muted"
               style={{
                 fontSize: 13,
+                color: "rgba(255, 255, 255, 0.9)",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -117,7 +118,7 @@ export default function Header() {
                   isActive ? "var(--activeBorder)" : "var(--border)"
                 }`,
                 background: isActive ? "var(--activeBg)" : "transparent",
-                color: "var(--text)",
+                color: "inherit",
                 fontWeight: 750,
                 fontSize: 14,
                 lineHeight: 1,
@@ -145,7 +146,7 @@ export default function Header() {
             borderRadius: 9999,
             border: "1px solid var(--border)",
             background: "var(--surface2)",
-            color: "var(--text)",
+            color: "inherit",
             fontWeight: 900,
             flex: "0 0 auto",
           }}
@@ -161,7 +162,7 @@ export default function Header() {
           style={{
             padding: "10px 12px 14px",
             borderTop: "1px solid var(--border)",
-            background: "var(--surface)", // ✅ matches header
+            background: "var(--surface)",
             backdropFilter: "none",
             WebkitBackdropFilter: "none",
           }}
@@ -186,7 +187,7 @@ export default function Header() {
                     isActive ? "var(--activeBorder)" : "var(--border)"
                   }`,
                   background: isActive ? "var(--activeBg)" : "var(--surface2)",
-                  color: "var(--text)",
+                  color: "inherit",
                   fontWeight: 800,
                   fontSize: 14,
                   lineHeight: 1,
