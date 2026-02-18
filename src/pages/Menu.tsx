@@ -108,7 +108,7 @@ function MenuGroup({ section }: { section: MenuSection }) {
 
 export default function Menu() {
   return (
-    <main style={{ paddingTop: 84, paddingBottom: 44 }}>
+    <main style={{ paddingTop: 84, paddingBottom: 28 }}>
       <style>{`
         .menuPageWrap {
           --menu-panel-left: #2e2b27;

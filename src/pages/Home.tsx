@@ -1,7 +1,19 @@
+import type { MouseEvent } from "react";
 import Marquee from "../components/sections/Marquee";
 import PhotoGrid from "../components/sections/PhotoGrid";
 
 export default function Home() {
+  const scrollToNextPopUp = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const target = document.getElementById("next-pop-up");
+    if (!target) return;
+
+    const headerOffset = 80;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: Math.max(0, top), left: 0, behavior: "auto" });
+    window.history.replaceState(null, "", "/home#next-pop-up");
+  };
+
   const photos = [
     { src: "/images/ig/ig-3.png", alt: "Pre & Post drink" },
     { src: "/images/ig/ig-5.png", alt: "Pre & Post drink" },
@@ -78,6 +90,59 @@ export default function Home() {
             .heroCtaDark:hover {
               background: rgba(255, 255, 255, 0.6);
             }
+
+            .aboutPreviewCard {
+              position: relative;
+              overflow: hidden;
+            }
+
+            .aboutPreviewCard::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              pointer-events: none;
+              background:
+                radial-gradient(circle at 12% 0%, rgba(214, 178, 111, 0.14), transparent 34%),
+                radial-gradient(circle at 92% 100%, rgba(255, 255, 255, 0.06), transparent 34%);
+            }
+
+            .aboutPreviewBody {
+              position: relative;
+              z-index: 1;
+              margin: 2px auto 0;
+              line-height: 1.35;
+              max-width: 60ch;
+              text-align: center;
+              font-family: "Avenir Next", "Optima", "Palatino Linotype", "Book Antiqua", serif;
+              font-size: clamp(17px, 2vw, 20px);
+              letter-spacing: 0.15px;
+              font-style: italic;
+              color: rgba(247, 238, 223, 0.95);
+            }
+
+            .aboutPreviewActions {
+              position: relative;
+              z-index: 1;
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              margin-top: 8px;
+              justify-content: center;
+            }
+
+            .aboutPreviewBtn {
+              color: var(--textOnSurface);
+              background: var(--activeBg);
+              border-color: var(--activeBorder);
+              min-height: 34px;
+              padding: 7px 12px;
+              font-size: 13px;
+            }
+
+            .aboutPreviewBtn:hover {
+              background: rgba(200, 155, 90, 0.36);
+              border-color: var(--activeBorder);
+            }
           `}</style>
           <div
             style={{
@@ -91,20 +156,19 @@ export default function Home() {
             <a className="btn btnPrimary heroCtaDark" href="/menu">
               View Menu
             </a>
-            <a className="btn btnPrimary heroCtaDark" href="/home#next-pop-up">
+            <a className="btn btnPrimary heroCtaDark" href="/home#next-pop-up" onClick={scrollToNextPopUp}>
               Next Pop-Up
             </a>
           </div>
           <section style={{ marginTop: 24 }}>
-            <div className="card tintedCard" style={{ padding: 18 }}>
-              <div style={{ fontWeight: 950, letterSpacing: -0.2 }}>What We're About</div>
-              <p className="muted" style={{ marginTop: 8, lineHeight: 1.8 }}>
-                Our mission: Serving nutritious cafe-inspired drinks in Central Florida.
+            <div className="card tintedCard aboutPreviewCard" style={{ padding: "5px 12px" }}>
+              <p className="muted aboutPreviewBody">
+                Serving nutritious cafe-inspired drinks in Central Florida.
               </p>
 
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-                <a className="btn" href="/about">
-                  About
+              <div className="aboutPreviewActions">
+                <a className="btn aboutPreviewBtn" href="/about">
+                  Read Our Story
                 </a>
               </div>
             </div>
@@ -334,6 +398,124 @@ export default function Home() {
             }
           `}</style>
         </section>
+
+        <section className="eventRecapSection" style={{ marginTop: 42 }}>
+          <div className="eventRecapWrap" style={{ padding: "4px 2px 0" }}>
+            <div className="eventRecapHeader">
+              <h3 className="eventVideoTitle" style={{ margin: 0 }}>
+                Sweet Moments
+              </h3>
+              <div className="eventVideoNote">... no pun intended</div>
+            </div>
+
+            <div className="eventVideosGrid" style={{ marginTop: 16, display: "flex", gap: 14 }}>
+              <div className="eventVideoShell">
+                <video
+                  className="eventVideo"
+                  controls
+                  playsInline
+                  preload="auto"
+                  style={{ borderRadius: 12, display: "block" }}
+                >
+                  <source src="/videos/event-2.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div className="eventVideoShell">
+                <video
+                  className="eventVideo"
+                  controls
+                  playsInline
+                  preload="auto"
+                  style={{ borderRadius: 12, display: "block" }}
+                >
+                  <source src="/videos/event-1.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            <style>{`
+              .eventRecapSection {
+                position: relative;
+              }
+
+              .eventRecapWrap {
+                max-width: 860px;
+                margin: 0 auto;
+              }
+
+              .eventRecapHeader {
+                padding: 0;
+              }
+
+              .eventVideoTitle,
+              .eventVideoLead {
+                text-align: center;
+              }
+
+              .eventVideoTitle {
+                font-size: clamp(26px, 3vw, 34px);
+                letter-spacing: -0.2px;
+                font-weight: 500;
+                line-height: 1.02;
+                color: #111;
+              }
+
+              .eventVideoNote {
+                margin-top: 0;
+                line-height: 1;
+                text-align: center;
+                font-family: "Bradley Hand", "Segoe Script", "Snell Roundhand", cursive;
+                font-size: clamp(18px, 2vw, 22px);
+                color: #111;
+              }
+
+              .eventVideoLead {
+                max-width: 54ch;
+                margin-inline: auto;
+                color: rgba(245, 236, 222, 0.82);
+              }
+
+              .eventVideosGrid {
+                justify-content: center;
+                align-items: flex-start;
+                flex-wrap: wrap;
+              }
+
+              .eventVideoShell {
+                border: 1px solid rgba(214, 178, 111, 0.32);
+                border-radius: 16px;
+                padding: 6px;
+                background: rgba(19, 18, 16, 0.45);
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+                transition: transform 200ms ease, box-shadow 200ms ease;
+              }
+
+              .eventVideoShell:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 14px 26px rgba(0, 0, 0, 0.24);
+              }
+
+              .eventVideo {
+                width: min(42vw, 290px);
+                height: auto;
+              }
+
+              @media (min-width: 900px) {
+                .eventVideo {
+                  width: min(26vw, 280px);
+                }
+              }
+
+              @media (max-width: 560px) {
+                .eventVideo {
+                  width: min(88vw, 320px);
+                }
+              }
+            `}</style>
+          </div>
+        </section>
+
         <div id="home-bottom" style={{ height: 1 }} />
       </div>
     </main>

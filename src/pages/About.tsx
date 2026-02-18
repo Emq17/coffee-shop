@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <main style={{ paddingTop: 96, paddingBottom: 72 }}>
+    <main style={{ paddingTop: 96, paddingBottom: 28 }}>
       <div className="container">
         {/* HERO */}
         <section
@@ -58,7 +58,7 @@ export default function About() {
                 <a className="btn btnPrimary" href="/menu">
                   View Menu
                 </a>
-                <Link className="btn" to="/home#home-bottom">
+                <Link className="btn" to="/home#next-pop-up">
                   See Pop-Ups
                 </Link>
                 <a className="btn" href="/contact">
@@ -79,7 +79,7 @@ export default function About() {
                 turning ordinary days into something warm and memorable.
               </p>
             </div>
-            <Link className="btn aboutUnifiedBtn" to="/home#home-bottom">
+            <Link className="btn aboutUnifiedBtn" to="/home#next-pop-up">
               Next Pop-Up Details
             </Link>
           </div>

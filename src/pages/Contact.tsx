@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Contact() {
   return (
-    <main style={{ paddingTop: 96, paddingBottom: 72 }}>
+    <main style={{ paddingTop: 96, paddingBottom: 28 }}>
       <div className="container">
         <section
           className="card contactCard"
@@ -85,7 +85,7 @@ export default function Contact() {
                 >
                   Message on TikTok
                 </a>
-                <Link className="btn eventsBookBtn" to="/home#home-bottom">
+                <Link className="btn eventsBookBtn" to="/home#next-pop-up">
                   Next Pop-Up Details
                 </Link>
               </div>

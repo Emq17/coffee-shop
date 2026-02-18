@@ -1,7 +1,7 @@
 :root {
   /* ===== BLUE/SAGE BASE ===== */
   --bg: #91ae9d;          /* overall page background (microscopically darker) */
-  --surface: #141211;     /* header surface (near-black espresso) */
+  --surface: #1b1715;     /* header surface (near-black espresso, slightly brighter) */
   --surface2: #4b372b;    /* card surface (medium brown) */
   --surface3: #2d231f;    /* deep espresso */
 

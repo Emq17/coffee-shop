@@ -34,6 +34,28 @@ export default function ScrollToTop() {
         return;
       }
 
+      if (id === "next-pop-up") {
+        let tries = 0;
+        const maxTries = 20;
+        const headerOffset = 96;
+
+        const scrollToPopUpCard = () => {
+          const target = document.getElementById(id);
+          if (target) {
+            const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+            window.scrollTo({ top: Math.max(0, top), left: 0, behavior: "auto" });
+          }
+
+          if (tries < maxTries) {
+            tries += 1;
+            window.setTimeout(scrollToPopUpCard, 80);
+          }
+        };
+
+        scrollToPopUpCard();
+        return;
+      }
+
       let tries = 0;
       const maxTries = 10;
 
