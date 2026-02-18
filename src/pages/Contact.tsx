@@ -89,8 +89,6 @@ export default function Contact() {
               </div>
             </div>
           </div>
-          <div className="contactDivider" role="presentation" />
-
           <div className="eventsWrap">
             <div className="eventsGrid">
               <div>
@@ -257,20 +255,8 @@ export default function Contact() {
               line-height: 1.5;
             }
 
-            .contactDivider {
-              margin: 18px 0;
-              height: 1px;
-              border: 0;
-              background: linear-gradient(
-                to right,
-                transparent,
-                rgba(217, 188, 132, 0.34) 14%,
-                rgba(217, 188, 132, 0.34) 86%,
-                transparent
-              );
-            }
-
             .eventsWrap {
+              margin-top: 18px;
               border: 1px solid rgba(217, 188, 132, 0.24);
               border-radius: 16px;
               padding: 16px;
