@@ -55,23 +55,23 @@ export default function Footer() {
           }
 
           .footerTop {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            gap: 8px;
             align-items: center;
-            gap: 7px;
           }
 
           .footerNav {
-            display: flex;
-            flex-direction: row;
-            gap: 16px;
+            display: grid;
+            grid-auto-flow: row;
+            grid-auto-rows: min-content;
+            gap: 8px;
             justify-content: center;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             font-weight: 700;
             font-size: 10px;
-            width: 100%;
-            max-width: 260px;
+            min-height: 40px;
           }
 
           .footerNav a {
@@ -87,6 +87,16 @@ export default function Footer() {
 
           .footerCenter {
             text-align: center;
+          }
+
+          .footerNav:first-of-type {
+            justify-self: start;
+            text-align: left;
+          }
+
+          .footerNavRight {
+            justify-self: end;
+            text-align: right;
           }
 
           .footerWordmark {
@@ -123,41 +133,31 @@ export default function Footer() {
             text-align: center;
           }
 
-          @media (max-width: 899px) {
-            .footerCenter {
-              order: 1;
-            }
-
-            .footerNav:not(.footerNavRight) {
-              order: 2;
-            }
-
-            .footerNavRight {
-              order: 3;
-            }
-          }
-
           @media (min-width: 900px) {
             .footerTop {
-              display: grid;
               grid-template-columns: 1fr auto 1fr;
               gap: 6px;
               align-items: center;
             }
 
             .footerNav {
+              display: flex;
               flex-direction: row;
-              order: 0;
+              gap: 10px;
               justify-content: flex-start;
               align-items: center;
-              width: auto;
-              max-width: none;
+              min-height: 0;
             }
 
             .footerNavRight {
               justify-content: flex-end;
-              align-items: center;
+              justify-self: end;
               text-align: left;
+            }
+
+            .footerNav:first-of-type {
+              justify-content: flex-start;
+              justify-self: start;
             }
 
             .footerCenter {

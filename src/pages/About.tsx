@@ -58,9 +58,6 @@ export default function About() {
                 <a className="btn btnPrimary" href="/menu">
                   View Menu
                 </a>
-                <Link className="btn" to="/home#next-pop-up">
-                  See Pop-Ups
-                </Link>
                 <a className="btn" href="/contact">
                   Contact
                 </a>
