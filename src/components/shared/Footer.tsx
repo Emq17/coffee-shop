@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer style={{ marginTop: 22, padding: "14px 0 18px" }}>
+    <footer style={{ marginTop: 16, padding: "8px 0 12px" }}>
       <div className="container">
-        <div className="card footerCard" style={{ padding: "12px 14px 10px" }}>
+        <div className="card footerCard" style={{ padding: "9px 12px 8px" }}>
           <div className="footerTop">
             <nav className="footerNav" aria-label="Footer left links">
               <Link to="/home">Home</Link>
@@ -57,19 +57,19 @@ export default function Footer() {
           .footerTop {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
           }
 
           .footerNav {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             font-weight: 700;
-            font-size: 11px;
+            font-size: 10px;
           }
 
           .footerNav a {
@@ -88,7 +88,7 @@ export default function Footer() {
           }
 
           .footerWordmark {
-            font-size: clamp(20px, 2.8vw, 28px);
+            font-size: clamp(18px, 2.3vw, 24px);
             line-height: 1;
             letter-spacing: -0.2px;
             color: #f6ebd6;
@@ -96,28 +96,28 @@ export default function Footer() {
           }
 
           .footerTagline {
-            margin-top: 4px;
+            margin-top: 2px;
             color: rgba(243, 236, 226, 0.78);
-            font-size: 10px;
+            font-size: 9px;
             letter-spacing: 0.6px;
             text-transform: uppercase;
             font-weight: 700;
           }
 
           .footerDivider {
-            margin: 9px 0 8px;
+            margin: 6px 0 6px;
             border-top: 1px solid rgba(214, 178, 111, 0.34);
           }
 
           .footerBottom {
             display: grid;
-            gap: 6px;
+            gap: 4px;
             justify-items: center;
           }
 
           .footerLegal {
             color: rgba(243, 236, 226, 0.82);
-            font-size: 11px;
+            font-size: 10px;
             text-align: center;
           }
 
